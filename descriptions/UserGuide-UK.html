@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Mercaria Unicorn EA v3.572 — Інструкція користувача</title>
+<style>
+:root{
+  --bg:#0c0f15; --panel:#161a24; --panel2:#1c2230; --line:#2a3142;
+  --txt:#e0e5ee; --dim:#8892a2;
+  --gold:#e0b94a; --green:#5ec27a; --red:#d36a6a; --blue:#5aa4ff; --orange:#e69a3c; --purple:#a98ce8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;padding:32px;max-width:1100px;margin:auto}
+
+/* HERO */
+.hero{text-align:center;padding:32px 0 36px;border-bottom:1px solid var(--line);margin-bottom:32px}
+.hero h1{color:var(--gold);font-size:38px;letter-spacing:2px;margin:0 0 8px}
+.hero .tag{color:var(--dim);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.hero .ver{display:inline-block;margin-top:14px;background:var(--panel);padding:5px 14px;border-radius:4px;border:1px solid var(--line);color:var(--blue);font-size:12px;letter-spacing:1px}
+
+/* HEADINGS */
+h2{color:var(--blue);margin-top:42px;font-size:22px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{color:var(--gold);margin-top:26px;font-size:17px}
+h4{color:var(--orange);margin-top:18px;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+
+/* TOC */
+.toc{background:var(--panel);padding:14px 22px;border-radius:6px;margin-bottom:24px;border-left:3px solid var(--blue)}
+.toc strong{color:var(--gold);display:block;margin-bottom:6px;font-size:12px;letter-spacing:1px}
+.toc a{color:var(--blue);text-decoration:none;margin-right:14px;font-size:13px}
+.toc a:hover{text-decoration:underline}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0}
+.card{background:var(--panel);padding:14px 18px;border-radius:6px;border-left:3px solid var(--blue)}
+.card.green{border-color:var(--green)}
+.card.gold{border-color:var(--gold)}
+.card.red{border-color:var(--red)}
+.card.orange{border-color:var(--orange)}
+.card.purple{border-color:var(--purple)}
+.card h4{margin:0 0 6px;color:var(--gold);font-size:14px;text-transform:none;letter-spacing:0}
+.card p{margin:4px 0;color:var(--dim);font-size:13px}
+
+/* TABLES */
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--gold)}
+td.param{color:var(--blue);font-family:Consolas,monospace;font-size:12px;white-space:nowrap}
+td.def{color:var(--orange);font-family:Consolas,monospace;font-size:12px;text-align:center}
+td.dim{color:var(--dim)}
+
+/* CODE / BOXES */
+code{background:var(--panel2);color:#c5d0e0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:12px}
+.tip{background:#1d2a22;border-left:3px solid var(--green);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+.warn{background:#2a1d1d;border-left:3px solid var(--red);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+.info{background:#1c2330;border-left:3px solid var(--blue);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+
+/* PANEL DIAGRAM (text-based) */
+.panel-mock{background:#0a0c12;border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin:14px 0;font-family:Consolas,monospace;font-size:11.5px;line-height:1.45;color:#c5d0e0;white-space:pre;overflow-x:auto}
+.panel-mock .ttl{color:var(--gold);font-weight:600}
+.panel-mock .gn{color:var(--green)}
+.panel-mock .rd{color:var(--red)}
+.panel-mock .bl{color:var(--blue)}
+.panel-mock .or{color:var(--orange)}
+.panel-mock .pu{color:var(--purple)}
+.panel-mock .dm{color:var(--dim)}
+.panel-mock .hdr-sec{color:var(--gold);border-top:1px solid var(--line);padding-top:4px;margin-top:6px;display:block}
+
+/* PILLS */
+.pill{display:inline-block;background:var(--panel2);color:var(--txt);padding:2px 9px;border-radius:10px;font-size:11px;margin-right:4px;border:1px solid var(--line)}
+.pill.gn{color:var(--green);border-color:var(--green)}
+.pill.rd{color:var(--red);border-color:var(--red)}
+.pill.or{color:var(--orange);border-color:var(--orange)}
+.pill.bl{color:var(--blue);border-color:var(--blue)}
+.pill.gd{color:var(--gold);border-color:var(--gold)}
+
+/* KPI ROW */
+.kpi{display:flex;gap:16px;justify-content:center;margin:22px 0;flex-wrap:wrap}
+.kpi .k{background:var(--panel);padding:14px 22px;border-radius:6px;text-align:center;min-width:150px;border-top:2px solid var(--gold)}
+.kpi .k .v{color:var(--gold);font-size:24px;font-weight:600;display:block}
+.kpi .k .l{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+/* DISCLAIMER */
+.disclaimer{background:#2a1d1d;border-left:3px solid var(--red);padding:16px 20px;margin:30px 0 10px;border-radius:4px;font-size:12.5px;color:#c5b0b0}
+.disclaimer b{color:var(--red)}
+
+/* HELPER */
+.muted{color:var(--dim);font-size:12px}
+ol li, ul li{margin:4px 0}
+hr{border:none;border-top:1px solid var(--line);margin:36px 0}
+</style>
+</head>
+<body>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  HERO                                              -->
+<!-- ────────────────────────────────────────────────── -->
+<div class="hero">
+  <h1>MERCARIA UNICORN</h1>
+  <div class="tag">Adaptive Grid Trading System  ·  XAUUSD-Optimized  ·  MetaTrader 5</div>
+  <div class="ver">v3.572  ·  Інструкція користувача</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <strong>Зміст</strong>
+  <a href="#about">Про радника</a>
+  <a href="#quickstart">Швидкий старт</a>
+  <a href="#panel">Панель керування</a>
+  <a href="#params">Параметри</a>
+  <a href="#scenarios">Сценарії використання</a>
+  <a href="#tips">Поради та фішки</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  1. ПРО РАДНИКА                                    -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="about">1. Про що цей радник</h2>
+
+<p>Mercaria Unicorn — адаптивний сітковий торговий робот для MetaTrader 5, розроблений під золото (XAUUSD), але застосовний до будь-якого CFD з налаштуванням кроку. Головна відмінність від типових «сіток з фіксованими параметрами» полягає в тому, що радник <b>сам підлаштовує кількість рівнів та розмір лоту під ваш депозит та обрану модель ринку</b>, а не торгує «наосліп» під одну заздалегідь налаштовану ситуацію.</p>
+
+<div class="kpi">
+  <div class="k"><span class="v">4</span><span class="l">профілі ринку</span></div>
+  <div class="k"><span class="v">4</span><span class="l">режими sizing</span></div>
+  <div class="k"><span class="v">6</span><span class="l">секцій панелі</span></div>
+  <div class="k"><span class="v">2-click</span><span class="l">перемикання на льоту</span></div>
+</div>
+
+<h3>Кому підійде</h3>
+<div class="grid">
+  <div class="card green">
+    <h4>Початківцю з досвідом 1–2 роки</h4>
+    <p>Якщо ви розумієте маржу, плече, спред — але не хочете вручну налаштовувати кожну угоду. Mercaria Unicorn дає готову систему: 4 заздалегідь налаштованих профілі волатильності, автоматичний підбір лота та кількості рівнів під депозит. Підключайтеся до ринку, не втручаючись у кожну угоду.</p>
+  </div>
+  <div class="card gold">
+    <h4>Професійному трейдеру з готовою стратегією</h4>
+    <p>Досвідчені трейдери використовують Mercaria Unicorn як <b>позиційного менеджера</b>: ви самі бачите точку входу (price action, новини, ваша система) — а радник знімає з вас усе рутинне навантаження: добір рівнів, recovery, двошаровий захист прибутку, контроль маржі та SL пулу. Параметри гнучко налаштовуються під ваші вимоги до ризику. Адаптивне масштабування <b>Lot Scaling</b> дозволяє однаково працювати на $1k, $10k та $100k без переналаштування порогів.</p>
+  </div>
+  <div class="card blue">
+    <h4>Тим, хто бажає повного контролю над розрахунками</h4>
+    <p>Всі ключові параметри — на панелі та у F7. Прозорі формули маржі, прогноз worst-case, рекомендації за 4 сценаріями одночасно. Немає «магічної чорної скриньки» — ви бачите, що і чому відбувається.</p>
+  </div>
+  <div class="card purple">
+    <h4>Тим, хто хоче поєднувати ручну та авто-торгівлю</h4>
+    <p>Кнопки <code>BUY</code>/<code>SELL</code> на панелі відкривають ручну позицію, після чого радник автоматично бере її на супровід. <b>PANIC</b> та <b>X CLOSE</b> — екстрений та підтверджуваний ручний вихід. <b>READ ONLY</b> — режим демонстрації без ризику випадкового кліку.</p>
+  </div>
+</div>
+
+<h3>Головні переваги</h3>
+<table>
+<tr><th style="width:30%">Що дає</th><th>Чому це корисно</th></tr>
+<tr><td><b>4 профілі волатильності</b> (NORMAL / SPIKE_M / SPIKE_L / BLACK SWAN)</td><td>Під спокійний день, день новин (CPI/FOMC), сюрприз NFP та кризову ситуацію радник тримає різні налаштування ризику. Перемикання — одним кліком з панелі.</td></tr>
+<tr><td><b>Адаптивний рушій Sizing</b></td><td>Радник сам розраховує безпечну кількість рівнів та розмір лоту під ваш депозит. Не потрібно вручну перебирати комбінації — все вираховується математично з безпечним запасом.</td></tr>
+<tr><td><b>Lot Scaling — TP/SL під лот</b> <span class="pill gd">v3.572</span></td><td>Коли радник змінює лот (ви самі чи AutoSizing), пороги TP, SL, трейл та захист прибутку автоматично масштабуються під новий обсяг. Один і той самий ризик-профіль працює на будь-якому депозиті — не потрібно вручну перераховувати параметри.</td></tr>
+<tr><td><b>Двошаровий захист прибутку</b></td><td>Спочатку спрацьовує відсотковий захист (якщо прибуток знизився на N% від піку), потім — звичайний USD-трейл. Це зберігає вже зароблений прибуток, а не повертає позицію в нуль.</td></tr>
+<tr><td><b>Profit-to-SL Bonus</b> <span class="pill gd">v3.572</span></td><td>Опціонально: частина зафіксованого прибутку (наприклад 50%) автоматично додається до допустимої просадки пулу як «подушка безпеки». Чим більше заробили в сесії — тим більший запас для відпрацювання наступного руху. При SL «подушка» списується. Ідеально для агресивного скейлінгу.</td></tr>
+<tr><td><b>Захист депозиту</b></td><td>Жорсткий SL пулу в USD + ліміт кількості SL за сесію + автозупинка при досягненні цілі по прибутку — все налаштовується окремо.</td></tr>
+<tr><td><b>LOCK-режим</b></td><td>Один клік захищає від випадкового натискання кнопок у гарячий момент. Автосупровід та ризик-вихід при цьому продовжують працювати.</td></tr>
+<tr><td><b>PANIC CLOSE</b></td><td>Кнопка екстреного закриття всіх позицій <i>без підтвердження</i> — на випадок, коли «треба просто зараз».</td></tr>
+<tr><td><b>READ ONLY режим</b></td><td>Якщо ви показуєте термінал клієнту / партнеру / знімаєте відео — переведіть панель у режим «тільки перегляд», випадкові кліки нічого не зроблять.</td></tr>
+</table>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  2. ШВИДКИЙ СТАРТ                                  -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="quickstart">2. Швидкий старт за 4 кроки</h2>
+
+<div class="info">
+  <b>Перед першим запуском обов'язково:</b> протестуйте на демо-рахунку мінімум 1–2 торгові сесії. Сіткові стратегії дуже чутливі до параметрів брокера (спред, комісія, swap), і одні й ті самі налаштування можуть давати різні результати на різних рахунках.
+</div>
+
+<h3>Крок 1. Встановлення з MQL5 Market</h3>
+<ol>
+  <li>Після покупки на <code>www.mql5.com/en/market</code> радник <b>автоматично стає доступним</b> у вашому терміналі MT5 — окремо завантажувати та копіювати файли не потрібно. Головне — увійти в терміналі під тим самим акаунтом MQL5, під яким купували.</li>
+  <li>У MetaTrader 5 відкрийте панель <b>Navigator</b> (Ctrl+N), розгорніть розділ <b>Market</b> — там ви побачите <code>Mercaria Unicorn</code> у списку придбаних продуктів.</li>
+  <li>Якщо радника немає в списку: <b>Toolbox → вкладка Market → Purchases</b>, виберіть <code>Mercaria Unicorn</code> і натисніть <b>Install</b>. Якщо термінал запропонує активувати — дотримуйтесь підказок (зазвичай одна активація = один комп'ютер, на MQL5 Market дається 5 активацій).</li>
+  <li>Відкрийте графік інструменту, на якому збираєтеся торгувати (рекомендується <b>XAUUSD</b>, будь-який таймфрейм — логіка не залежить від ТФ графіка).</li>
+  <li>Перетягніть радника з Navigator → Market на графік. Відкриється вікно налаштувань (F7).</li>
+</ol>
+<div class="info">
+<b>Демо-рахунок.</b> Покупка з Market працює і на демо-рахунках MT5 — у вас буде стільки ж активацій. Спочатку протестуйте на демо 1–2 торгові сесії, а вже потім вмикайте на реальному рахунку.
+</div>
+
+<h3>Крок 2. Первинне налаштування</h3>
+<p>При перетягуванні відкриється вікно налаштувань (F7). Для першого запуску рекомендую <b>не чіпати більшість параметрів</b> і перевірити лише ці:</p>
+
+<table>
+<tr><th style="width:25%">Параметр</th><th style="width:18%">Що зробити</th><th>Навіщо</th></tr>
+<tr><td class="param">InputMagic</td><td>Залиште як є (885533) або встановіть свій</td><td>Тільки якщо запускаєте кілька копій радника на одному рахунку — кожній потрібен унікальний Magic.</td></tr>
+<tr><td class="param">LotSize</td><td>0.01 (мінімум)</td><td>Початковий лот стартової позиції. На демо ставте мінімум і спостерігайте, як поводиться система.</td></tr>
+<tr><td class="param">MaxDrawdownUSD</td><td>~5–10% від депозиту</td><td>Це SL всієї сітки в доларах. Наприклад, на рахунку $1000 ставте 50–100. Це жорсткий вихід — пул буде закритий, навіть якщо міг вийти в плюс.</td></tr>
+<tr><td class="param">AutoSizing_Mode</td><td>ADVISORY (рекомендується)</td><td>У цьому режимі радник <i>показує</i> рекомендації на панелі, але не змінює ваші значення. Ідеально для першого знайомства.</td></tr>
+<tr><td class="param">AutoSizing_Scenario</td><td>SPIKE_M</td><td>Стартовий профіль ринку. SPIKE_M — робочий «середній» режим під звичайні новинні дні.</td></tr>
+</table>
+
+<h3>Крок 3. Дозвольте автоторгівлю</h3>
+<ol>
+  <li>У терміналі вгорі натисніть кнопку <b>Algo Trading</b> (зелена — включено).</li>
+  <li>На графіку у правому верхньому кутку має з'явитися зелена іконка «play» біля імені радника.</li>
+</ol>
+
+<h3>Крок 4. Спостерігайте за панеллю</h3>
+<p>На графіку з'явиться панель керування (див. §3). Перші хвилини нічого може не відбуватися — радник <b>чекає на сигнал на вхід</b>. У цей час у шапці панелі ви побачите статус <span class="pill gn">READY</span>.</p>
+
+<div class="tip">
+<b>Коли радник відкриє першу угоду:</b> статус зміниться на <span class="pill bl">ACTIVE +1</span> (плюсова сторона) або <span class="pill rd">ACTIVE -1 (DD)</span> (мінусова), а в секції <b>GRID</b> ви побачите дані щодо відкритої сітки.
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  3. ПАНЕЛЬ                                         -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="panel">3. Панель — ваш командний центр</h2>
+
+<p>Вся робота з радником ведеться через панель на графіку. Жодних F7-перезапусків для зміни налаштувань на льоту — все здійснюється кліком. Панель складається з <b>фіксованої шапки</b> та <b>6 розкривних секцій</b>.</p>
+
+<h3>Структура панелі (текстова схема)</h3>
+
+<div class="panel-mock">
+<span class="ttl">MERCARIA UNICORN          XAUUSD          12:34:56</span>
+
+<span class="gn">┌────────────────────────────────────┐</span>      H1 in
+<span class="gn">│         ACTIVE  +3                 │</span>      03:24
+<span class="gn">└────────────────────────────────────┘</span>
+
+Float:  <span class="gn">+12.40</span>             Equity: 1015.40
+Session: <span class="gn">+47.20</span> / 200 USD (24%)
+█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  target progress
+
+<span class="gn">[ON]</span> [OFF]  <span class="bl">[BUY]</span> <span class="rd">[SELL]</span>  <span class="rd">[PANIC]</span> <span class="rd">[X CLOSE]</span> <span class="or">[RESET]</span>
+
+[LOCK]  [READ OFF]  [MOVE]   Margin Call: ████████░ 87%
+
+<span class="hdr-sec">▼ LIVE</span>
+  Candle:     2026.05.18 12:00
+  Entries:    <span class="gn">2/120</span>
+  Spread:     12.5 pt (avg 14.0, max 35)
+  Commission: 0.42 USD (0.140/lot)
+
+<span class="hdr-sec">▼ SIZING</span>
+  Balance: 1104.10 USD                 Leverage: 1:500
+  Mode:    [OFF]  <span class="bl">[ADVISORY]</span>  [CAP]  [FULL]
+  Scen:    [NORMAL] <span class="gn">[SPIKE_M]</span> [SPIKE_L] [BLK_SWAN]
+  Active:  30 × 0.01 lot               Scenario:  SPIKE_M (3.0k pt)
+  Full margin: 268.80 USD              Worst case: -945.00 USD
+  ── Recommended setups (N × lot) ──
+  Normal:    <span class="gn">29 × 0.01   (need $1079)</span>
+  Spike M:   <span class="gn">24 × 0.01   (need $1087)</span>
+  Spike L:   <span class="or">19 × 0.01   (need $1083)</span>
+  Blk Swan:  <span class="rd">14 × 0.01   (need $1063)</span>
+
+<span class="hdr-sec">▶ GRID</span>          <span class="dm">(згорнуто — клікніть щоб розгорнути)</span>
+<span class="hdr-sec">▶ RISK</span>
+<span class="hdr-sec">▶ STATS</span>
+<span class="hdr-sec">▶ LOG</span>
+</div>
+
+<!-- HEADER -->
+<h3>3.1. Шапка панелі (завжди видима)</h3>
+
+<table>
+<tr><th style="width:30%">Елемент</th><th>Що показує / робить</th></tr>
+<tr><td><b>Title row</b></td><td><span class="pill gd">MERCARIA UNICORN</span> · символ інструменту · поточний час сервера.</td></tr>
+<tr><td><b>Status badge</b><br><span class="muted">центральна кольорова плашка</span></td><td>
+  <span class="pill gn">READY</span> — немає позицій, радник чекає на сигнал.<br>
+  <span class="pill bl">ACTIVE  +N</span> — відкрито N рівнів, ціна йде в нашу сторону.<br>
+  <span class="pill rd">ACTIVE  -N (DD)</span> — відкрито N рівнів, ціна проти нас (просадка).<br>
+  <span class="pill or">COOLDOWN Ns</span> — пул щойно закритий, радник відпочиває N секунд.<br>
+  <span class="pill" style="color:#90a070;border-color:#90a070">AUTO OFF</span> — автоторгівлю вимкнено (нових входів не буде).<br>
+  <span class="pill or">WAIT (entry limit)</span> — ліміт входів на поточну свічку вичерпано.
+</td></tr>
+<tr><td><b>H1 in</b></td><td>Скільки хвилин залишилося до закриття поточної H1-свічки. Корисно, якщо використовуєте H1-фільтр.</td></tr>
+<tr><td><b>Float</b></td><td>Плаваючий PnL за всіма відкритими позиціями радника. Зелений = плюс, червоний = мінус.</td></tr>
+<tr><td><b>Equity</b></td><td>Поточний equity рахунку.</td></tr>
+<tr><td><b>Session</b></td><td>Закритий прибуток з моменту запуску радника + поточний float, у вигляді <code>сума / ціль (відсоток)</code>. Прогрес-бар під рядком візуалізує рух до цілі сесії.</td></tr>
+<tr><td><b>Margin Call bar</b></td><td>Прогрес-бар вільної маржі в %. <span class="pill gn">>60%</span> зелений, <span class="pill or">30–60%</span> жовтий, <span class="pill rd">&lt;30%</span> червоний — критичний рівень, можливий margin call від брокера.</td></tr>
+<tr><td><b>Background</b></td><td>Фон усієї панелі темніє у червоний бік зі зростанням просадки. 5 рівнів забезпечують периферійний контроль стану («все добре / тривога / червона зона»).</td></tr>
+</table>
+
+<h4>Кнопки шапки</h4>
+
+<table>
+<tr><th style="width:25%">Кнопка</th><th>Дія</th></tr>
+<tr><td><span class="pill gn">ON</span></td><td>Увімкнути автоторгівлю. Радник почне шукати сигнали на нові входи.</td></tr>
+<tr><td><span class="pill" style="color:#aa3030;border-color:#aa3030">OFF</span></td><td>Вимкнути автоторгівлю. Уже відкрита сітка продовжить супроводжуватися до закриття по TP/SL/трейлу — але нових сетапів не буде.</td></tr>
+<tr><td><span class="pill bl">BUY</span></td><td>Відкрити ручну BUY-позицію поточним активним лотом. Далі радник сам підхопить її та буде вести за своєю логікою (супровід, recovery, захист прибутку).</td></tr>
+<tr><td><span class="pill rd">SELL</span></td><td>Те саме, що й BUY, але в шорт.</td></tr>
+<tr><td><span class="pill rd">PANIC</span></td><td><b>Екстрене закриття</b> всіх позицій <i>без підтвердження</i>. Використовуйте, коли «треба просто зараз». Будьте обережні — скасувати дію неможливо.</td></tr>
+<tr><td><span class="pill rd">X CLOSE</span></td><td>Закрити всі позиції <b>з підтвердженням</b> (подвійний клік): перший клік показує CONFIRM?, другий — виконує дію. Безпечніше, ніж PANIC.</td></tr>
+<tr><td><span class="pill or">RESET</span></td><td>Скинути внутрішні лічильники радника (повний reset state). Також вимагає подвійного кліку. Використовується, якщо щось «зависло».</td></tr>
+<tr><td><span class="pill" style="color:#aa6060;border-color:#aa6060">LOCK</span></td><td>Заблокувати всі кнопки від випадкових кліків. Автосупровід та ризик-вихід при цьому <b>продовжують працювати</b>. Це захист трейдера від самого себе в момент стресу.</td></tr>
+<tr><td><span class="pill" style="color:#aa6060;border-color:#aa6060">READ ON/OFF</span></td><td>Режим «тільки перегляд». Повністю блокує будь-які кліки (включаючи Lock/Drag). Зручно для скріншотів, відео, демонстрацій.</td></tr>
+<tr><td><span class="pill" style="color:#7080a0;border-color:#7080a0">MOVE</span></td><td>Увімкнути режим перетягування. Після активації мишкою переносите панель у зручне місце. Положення зберігається між перезапусками.</td></tr>
+</table>
+
+<!-- SECTIONS -->
+<h3>3.2. Секції (розгортаються / згортаються)</h3>
+
+<p>Кліком по заголовку секції (трикутник <code>▼/▶</code>) ви її розкриваєте або приховуєте. Це дозволяє тримати на графіку тільки те, що вам дійсно потрібно зараз.</p>
+
+<div class="grid">
+
+  <div class="card">
+    <h4>▼ LIVE — моніторинг</h4>
+    <p><b>Candle</b> — поточна H1-свічка.<br>
+       <b>Entries</b> — лічильник входів на свічку (захист від переторгівлі).<br>
+       <b>Spread</b> — поточний / середній / максимальний спред у пунктах.<br>
+       <b>Commission</b> — комісія за всіма відкритими позиціями (загальна та в перерахунку на лот).</p>
+  </div>
+
+  <div class="card gold">
+    <h4>▼ SIZING — адаптивний sizing</h4>
+    <p><b>Balance / Leverage</b> — дані рахунку.<br>
+       <b>4 кнопки Mode</b> — режим роботи (OFF / ADV / CAP / FULL).<br>
+       <b>4 кнопки Scen</b> — профіль ринку (NORMAL / SPIKE_M / SPIKE_L / BLK_SWAN).<br>
+       <b>Active</b> — те, чим радник дійсно торгує прямо зараз.<br>
+       <b>Full margin</b> — скільки маржі буде потрібно на ПОВНУ сітку.<br>
+       <b>Worst case</b> — прогноз найгіршого сценарію просадки в USD.<br>
+       <b>Recommended setups</b> — таблиця «що радник пропонує» для кожного з 4 профілів, із зазначенням мінімального депозиту.</p>
+  </div>
+
+  <div class="card gold">
+    <h4>▼ GRID — стан активної сітки</h4>
+    <p><b>Direction</b> — buy/sell.<br>
+       <b>Levels</b> — відкрито / максимум (наприклад <code>3/30</code>).<br>
+       <b>Avg Entry</b> — середня ціна входу всієї сітки.<br>
+       <b>Grid PnL</b> — поточний PnL пулу в USD.<br>
+       <b>Volume</b> — сумарний обсяг.<br>
+       <b>Next level</b> — ціна наступного рівня + дистанція до нього.</p>
+  </div>
+
+  <div class="card red">
+    <h4>▼ RISK — стан рахунку</h4>
+    <p><b>Setup margin</b> — зайнята маржа активним сетапом в USD та % від балансу.<br>
+       <b>Free margin</b> — вільна маржа.<br>
+       <b>Margin level</b> — % рівня маржі (критично, якщо <200).<br>
+       <b>Distance to MC</b> — скільки пунктів до Margin Call та еквівалент в USD. Колір: зелений = безпечно, помаранчевий = увага, червоний = дуже близько.<br>
+       <b>SL buffer</b> — накопичена «подушка» від Profit-to-SL Bonus (якщо увімкнено). Показує на скільки USD розширено ефективний SL пулу.</p>
+  </div>
+
+  <div class="card green">
+    <h4>▼ STATS — статистика та здоров'я</h4>
+    <p><b>Closed PnL</b> — закритий прибуток з початку сесії.<br>
+       <b>Pools closed</b> — скільки пулів закрилося в прибуток / у збиток.<br>
+       <b>SL hits</b> — лічильник SL-виходів та ліміт сесії.<br>
+       <b>Max drawdown</b> — максимальна просадка (USD та %).<br>
+       <b>Trail peak</b> + бар — поточний пік прибутку та наскільки далеко від старту трейлу.<br>
+       <b>Pools today</b> — лічильник пулов за день.<br>
+       <b>Streak</b> — серія плюс / мінус.<br>
+       <b>Win rate</b> — % виграшних пулів.<br>
+       <b>Avg pool</b> — середній PnL на пул.<br>
+       <b>Max move</b> — максимальний рух у пунктах за останні пули.</p>
+  </div>
+
+  <div class="card purple">
+    <h4>▼ LOG — журнал подій</h4>
+    <p>Скользящий буфер останніх 8 подій радника: входи, закриття по TP, SL, трейлу, захисту прибутку, ручні дії. Корисно подивитися «що сталося за останні хвилини» без переходу до вкладки Experts в MT5.</p>
+  </div>
+
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  4. ПАРАМЕТРИ                                      -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="params">4. Параметри у вікні налаштувань (F7)</h2>
+
+<p>Тут наведено всі налаштовувані параметри з поясненням, на що вони впливають. Параметри розбиті на логічні групи.</p>
+
+<!-- Основные -->
+<h3>4.1. Основні</h3>
+<p>Базові параметри сітки та ризик-ліміти. Це те, що ви налаштовуєте в першу чергу.</p>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">Значення за замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">InputMagic</td><td class="def">885533</td><td>Унікальний ідентифікатор радника на рахунку. Потрібен, якщо на одному рахунку працюють кілька копій радника — кожній призначайте свій Magic.</td></tr>
+<tr><td class="param">LotSize</td><td class="def">0.01</td><td>Розмір лоту стартового ордера. На невеликих депозитах ($300–$1000) — залиште мінімум 0.01.</td></tr>
+<tr><td class="param">GridStepPoints</td><td class="def">150</td><td>Крок сітки в пунктах. Менше — частіші додавання ордерів, вища щільність, потрібен більший запас маржі. Більше — рідше, але більші рухи між рівнями. <b>Для XAUUSD 100–200 — робочий діапазон.</b></td></tr>
+<tr><td class="param">MaxGridLevels</td><td class="def">30</td><td>Максимально допустима кількість рівнів в одній сітці. Після досягнення ліміту радник припиняє додавати нові рівні та чекає на закриття. Під депозит $1000 при кроці 150 — 30 рівнів є розумним максимумом.</td></tr>
+<tr><td class="param">TakeProfitUSD</td><td class="def">4.0</td><td>Ціль прибутку пулу в USD. Коли сумарний PnL пулу досягає цього значення — сітка закривається. Маленькі значення = часті швидкі TP, агресивний накопичувальний режим.</td></tr>
+<tr><td class="param">MaxDrawdownUSD</td><td class="def">900.0</td><td><b>Найважливіший ризик-параметр.</b> SL всього пулу в USD. Якщо плаваючий збиток пулу досяг цього значення — відбувається екстрене закриття. <b>Ставьте 5–10% від депозиту.</b></td></tr>
+<tr><td class="param">MinPauseBetweenOrders</td><td class="def">10</td><td>Мінімальна пауза між відкриттям сусідніх ордерів (у секундах). Захист від спам-відкриттів на різких рухах ринку.</td></tr>
+</table>
+
+<!-- AutoSizing -->
+<h3>4.2. AutoSizing — адаптивний рушій</h3>
+<p>Ця група визначає, як радник <b>сам</b> підбирає кількість рівнів та лот під ваш депозит. Головна перевага радника Mercaria Unicorn.</p>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">AutoSizing_Mode</td><td class="def">ADVISORY</td><td>
+  <b>OFF</b> — радник використовує ваші MaxGridLevels та LotSize як є (as-is).<br>
+  <b>ADVISORY</b> — ваші параметри активні, але на панелі <i>показуються рекомендації</i> для кожного профілю. <span class="pill gd">Рекомендується для початку</span><br>
+  <b>CAP</b> — обмежує MaxGridLevels до безпечного значення за обраним профілем, лот залишається вашим.<br>
+  <b>FULL</b> — повністю бере кількість рівнів N та лот з розрахунків радника, ваші значення ігноруються.</td></tr>
+<tr><td class="param">AutoSizing_Scenario</td><td class="def">SPIKE_M</td><td>Стартовий профіль волатильності. Див. §4.3.</td></tr>
+<tr><td class="param">AutoSizing_SafetyBuffer</td><td class="def">1.2</td><td>Множник «запасу» при розрахунку необхідного депозиту. 1.2 = 20% запасу над теоретичним мінімумом. Не опускайте нижче 1.1.</td></tr>
+<tr><td class="param">AutoSizing_MinLevels</td><td class="def">5</td><td>Нижня межа перебору рівнів. Захищає від занадто «короткої» сітки.</td></tr>
+<tr><td class="param">AutoSizing_MaxLevels</td><td class="def">50</td><td>Верхня межа перебору рівнів. Захищає від занадто «довгої» сітки.</td></tr>
+<tr><td class="param">AutoSizing_LotStep</td><td class="def">0.01</td><td>Крок перебору лота при пошуку оптимального значення.</td></tr>
+<tr><td class="param">AutoSizing_MaxLot</td><td class="def">1.00</td><td>Загальна гранична межа лота (стеля), яку радник не перевищить навіть у режимі FULL.</td></tr>
+<tr><td class="param">AutoSizing_RescaleDown</td><td class="def">true</td><td>Чи дозволяти раднику <i>зменшувати</i> N та лот після закриття пулу (якщо баланс просів). true = адаптивно, false = тільки в плюс.</td></tr>
+</table>
+
+<!-- Risk Scenarios -->
+<h3>4.3. Risk Scenarios — 4 профілі волатильності</h3>
+<p>Це серце адаптивності. Кожен профіль — це калібрування «допустимого ходу ринку проти вас», яке радник враховує при розрахунку sizing. Перемикається кліком на панелі в будь-який момент.</p>
+
+<table>
+<tr><th style="width:18%">Профіль</th><th style="width:14%">Дефолт</th><th>Коли застосовувати</th></tr>
+<tr><td><span class="pill gn">NORMAL</span></td><td class="def">1500 pt</td><td>Спокійний день, стандартна M1-волатильність, без важливих новин.</td></tr>
+<tr><td><span class="pill or">SPIKE_M</span></td><td class="def">3000 pt</td><td>День публікації CPI, FOMC, ECB. Заплановані новини з відомим часом виходу.</td></tr>
+<tr><td><span class="pill rd">SPIKE_L</span></td><td class="def">5000 pt</td><td>NFP з великим сюрпризом, протоколи ФРС, несподівані дані.</td></tr>
+<tr><td><span class="pill" style="color:#8b3030;border-color:#8b3030">BLACK SWAN</span></td><td class="def">8000 pt</td><td>Геополітика, банківські кризи, несподівані commodity-рухи. Жорстка верхня межа захисту.</td></tr>
+</table>
+
+<h4>Параметри групи</h4>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">Scen_Normal_pt<br>Scen_SpikeM_pt<br>Scen_SpikeL_pt<br>Scen_BlackSwan_pt</td><td class="def">1500<br>3000<br>5000<br>8000</td><td>Калібрування кожного профілю. Якщо на вашому інструменті/брокері фактичні рухи стабільно більші — збільшіть відповідне значення.</td></tr>
+<tr><td class="param">Scen_PyramidK</td><td class="def">0.6</td><td>Калібрувальний коефіцієнт моделі ризику. Якщо бачите систематичну розбіжність «факт vs розрахунок» у STATS — підлаштовуєте цей параметр. Більшості користувачів змінювати його не потрібно.</td></tr>
+<tr><td class="param">Scen_Normal_MaxLot<br>Scen_SpikeM_MaxLot<br>Scen_SpikeL_MaxLot<br>Scen_BSW_MaxLot</td><td class="def">0.0 (=загальний)</td><td>Стеля лота для кожного окремого сценарію (per-scenario). Якщо 0 — використовується загальний <code>AutoSizing_MaxLot</code>. Встановивши значення, можна налаштувати так: на NORMAL дозволити лот до 0.5, а на BLACK SWAN — тільки 0.05.</td></tr>
+</table>
+
+<div class="tip">
+<b>Логіка вибору профілю:</b> вранці перед початком сесії дивіться економічний календар. Якщо на день заплановано вихід CPI/FOMC — перемикайтеся на <b>SPIKE_M</b>. Якщо очікуєте на NFP — <b>SPIKE_L</b>. Геополітика, криза — <b>BLACK SWAN</b>. Звичайний спокійний день — <b>NORMAL</b>.
+</div>
+
+<!-- Pyramid Trail -->
+<h3>4.4. Pyramid &amp; Recovery — керування прибутком</h3>
+<p>Ця група відповідає за USD-трейл по піку плаваючого прибутку.</p>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">UsePyramidTrail</td><td class="def">true</td><td>Увімкнути трейл по піку. Якщо вимкнено — пул закривається тільки по TakeProfitUSD/MaxDrawdownUSD/Profit Protection.</td></tr>
+<tr><td class="param">PyramidTrailStart</td><td class="def">4.75</td><td>З якого піку прибутку (USD) починає працювати трейл. Менше = раніше вмикається, частіше виходимо з позиції, скромніший середній прибуток на пул.</td></tr>
+<tr><td class="param">PyramidTrailStep</td><td class="def">2.45</td><td>На скільки USD відкат від піку приведе до закриття. Менше = більш чутливий трейл, частіші ранні виходи.</td></tr>
+</table>
+
+<!-- Profit Protection -->
+<h3>4.5. Profit Protection — відсотковий захист</h3>
+<p>Додатковий шар захисту прибутку. Спрацьовує <b>раніше</b>, ніж Pyramid Trail, якщо піковий прибуток досяг порогу. Головна фішка консервативної версії.</p>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">UseProfitProtect</td><td class="def">true</td><td>Увімкнути відсотковий захист прибутку.</td></tr>
+<tr><td class="param">ProfitProtectMinUSD</td><td class="def">5.0</td><td>Мінімальний піковий прибуток (USD), при якому вмикається захист. Поки пік не досяг цього значення — захист не працює. <i>Масштабується під лот (див. §4.6).</i></td></tr>
+<tr><td class="param">ProfitProtectDropPct</td><td class="def">30.0</td><td>Закрити пул, якщо поточний прибуток відкотився на N % від піку. За замовчуванням 30%: пік був +10 USD, знизився до +7 USD — закриття.</td></tr>
+</table>
+
+<div class="info">
+<b>Приклад роботи:</b> радник зайшов у сітку, прибуток зріс до +12 USD (пік). При <code>ProfitProtectDropPct = 30</code> допустимий відкат — 30% від 12 = 3.6 USD. Як тільки прибуток впав до +8.4 USD — пул закривається, до кишені фіксується +8.4 USD. Без цього захисту прибуток міг би повернутися назад у нуль або мінус.
+</div>
+
+<!-- Profit-to-SL Bonus -->
+<h3>4.6. Profit-to-SL Bonus — подушка безпеки із закритого прибутку <span class="pill gd">v3.572</span></h3>
+<p>Опціональний механізм: частина кожного <b>закритого в плюс</b> пулу додається до допустимої просадки наступного пулу як «подушка». Чим більше заробили в сесії — тим більший запас для відпрацювання наступного руху. При SL «подушка» повністю списується. Це особливо корисно при агресивному скейлінгу депозиту — дає буфер за рахунок уже заробленого, не ризикуючи початковим «тілом» депозиту.</p>
+
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">UseProfitToSLBonus</td><td class="def">false</td><td>Увімкнути механізм. За замовчуванням вимкнено — для більшості користувачів класичний статичний SL зрозуміліший.</td></tr>
+<tr><td class="param">ProfitToSLPercent</td><td class="def">50.0</td><td>Який % закритого прибутку йде в подушку SL. Наприклад, 50% від пулу на $10 = $5 йде в буфер.</td></tr>
+<tr><td class="param">ProfitToSLCapUSD</td><td class="def">0.0</td><td>Максимально накопичена подушка (USD). <b>0</b> = без ліміту. Наприклад, якщо встановлено 200 — подушка не виросте більше ніж на +$200 до базового SL.</td></tr>
+</table>
+
+<div class="info">
+<b>Приклад роботи:</b> базовий <code>MaxDrawdownUSD=100</code>, <code>UseProfitToSLBonus=true</code>, <code>ProfitToSLPercent=50</code>:
+<ol style="margin:6px 0 0 18px">
+  <li>Закрився пул #1 в плюс $10 → бонус = +$5. Ефективний SL = −$105.</li>
+  <li>Закрився пул #2 в плюс $8 → бонус = +$9. Ефективний SL = −$109.</li>
+  <li>Закрився пул #3 в плюс $12 → бонус = +$15. Ефективний SL = −$115.</li>
+  <li>Пул #4 пішов по SL на $115 → бонус повністю списано (стане 0). Ефективний SL знову стає −$100.</li>
+</ol>
+На панелі → RISK → рядок <b>SL buffer</b> показує поточну накопичену подушку та ефективний SL.<br>
+<span class="muted">Підходить для досвідчених трейдерів, які хочуть «реінвестувати» частину прибутку в страховку ризиків, а не виводити його відразу.</span>
+</div>
+
+<!-- Lot Scaling -->
+<h3>4.7. Lot Scaling — адаптація під лот <span class="pill gd">v3.572</span></h3>
+<p>Коли радник працює з лотом, відмінним від опорного (<code>BaseLotReference</code>), всі USD-пороги (TP, SL, трейл, захист прибутку) автоматично масштабуються — щоб ризик-профіль залишався однаковим при будь-якому розмірі позиції.</p>
+
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">UseLotScaling</td><td class="def">true</td><td>Увімкнути адаптацію TP/SL/трейлу/захисту під поточний лот. Якщо <b>false</b> — всі USD-пороги працюють як абсолютні значення (класичний режим).</td></tr>
+<tr><td class="param">BaseLotReference</td><td class="def">0.01</td><td>Опорний лот. Якщо поточний лот = опорному, множник = 1.0 (все працює як задано). Якщо лот у 5 разів більший — пороги також ×5.</td></tr>
+<tr><td class="param">GridTPGrowthPercent</td><td class="def">3.0</td><td>На скільки % зростає TP пулу з кожним новим рівнем сітки. Компенсує збільшення обсягу в міру зростання сітки. <b>0</b> = TP не зростає, завжди фіксований (з урахуванням множника лота).</td></tr>
+<tr><td class="param">VirtualBalanceUSD</td><td class="def">0.0</td><td>Віртуальний баланс для AutoSizing. Якщо <b>&gt; 0</b>, радник розраховує sizing так, ніби на рахунку цей баланс (навіть якщо реально більше чи менше). Зручно для копіювання налаштувань між рахунками або для тестів. <b>0</b> = використовувати реальний баланс рахунку.</td></tr>
+</table>
+
+<div class="info">
+<b>Приклад масштабування:</b> базові налаштування: <code>LotSize=0.01</code>, <code>TakeProfitUSD=4</code>, <code>MaxDrawdownUSD=900</code>, <code>BaseLotReference=0.01</code>.<br>
+При збільшенні лота автоматично отримуємо:
+<table>
+<tr><th>Лот</th><th>Множник</th><th>TP (1-й рівень)</th><th>TP (10-й рівень, +3% × 9)</th><th>SL пулу</th></tr>
+<tr><td>0.01</td><td>×1.0</td><td>$4.00</td><td>$5.22</td><td>$900</td></tr>
+<tr><td>0.02</td><td>×2.0</td><td>$8.00</td><td>$10.44</td><td>$1800</td></tr>
+<tr><td>0.05</td><td>×5.0</td><td>$20.00</td><td>$26.10</td><td>$4500</td></tr>
+<tr><td>0.10</td><td>×10.0</td><td>$40.00</td><td>$52.20</td><td>$9000</td></tr>
+</table>
+<span class="muted"><b>Важливо:</b> <code>TargetProfitUSD</code> (ціль сесії) НЕ масштабується — це абсолютна ціль в USD, ви її встановлюєте самі.</span>
+</div>
+
+<!-- Candle Filter -->
+<h3>4.8. Candle Filter — фільтр за напрямком</h3>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">CandleDirectionFilter</td><td class="def">false</td><td>Якщо true — радник входить у ринок тільки в напрямку поточної H1-свічки. Не відкриває шорт на бичачій свічці та навпаки.</td></tr>
+</table>
+
+<!-- Entries -->
+<h3>4.9. Entries per candle — ліміт входів на свічку</h3>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">MaxEntriesPerCandle</td><td class="def">120</td><td>Максимум входів всередині однієї H1-свічки. Захист від переторгівлі на сильному імпульсному русі.</td></tr>
+</table>
+
+<!-- Session -->
+<h3>4.10. Session — цілі та ліміти сесії</h3>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">TargetProfitUSD</td><td class="def">200.0</td><td>Ціль прибутку сесії. Після досягнення цієї суми радник <b>сам вимикає автоторгівлю</b> (AUTO OFF). Відкриті пули доводяться до закриття, але нові сетапи відкриватися не будуть.</td></tr>
+<tr><td class="param">MaxLossCount</td><td class="def">10</td><td>Максимум SL-хітів за сесію. При досягненні ліміту — AUTO OFF.</td></tr>
+</table>
+
+<!-- Visual -->
+<h3>4.11. Visual — оформлення панелі</h3>
+<table>
+<tr><th style="width:22%">Параметр</th><th style="width:14%">За замовчуванням</th><th>На що впливає</th></tr>
+<tr><td class="param">PanelFontSize</td><td class="def">9</td><td>Розмір шрифту на панелі.</td></tr>
+<tr><td class="param">PanelFont</td><td class="def">Segoe UI</td><td>Шрифт. Будь-який системний.</td></tr>
+</table>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  4.12 БАЛАНСИ / ПЛЕЧІ / ТИПИ РАХУНКІВ               -->
+<!-- ────────────────────────────────────────────────── -->
+<h3>4.12. Баланс, плече та тип рахунку — як вони впливають на роботу радника</h3>
+
+<p>На різних брокерах та типах рахунків одні й ті самі параметри радника дають <b>різні</b> можливості та обмеження. Важливо розуміти три фактори: розмір балансу, кредитне плече, тип рахунку (Standard / ECN / Cent / Hedging / Netting). Вони безпосередньо визначають, скільки рівнів сітки фізично поміститься в маржу і який початковий лот буде безпечним.</p>
+
+<h4>Вплив кредитного плеча на маржу</h4>
+<p>Маржа одного рівня XAUUSD 0.01 лота ≈ <code>Price × ContractSize × Lots / Leverage</code>. Для золота <code>ContractSize = 100</code>, тому за ціни $4500 і лота 0.01: <code>4500 × 100 × 0.01 / Leverage = 4500 / Leverage</code> (наприклад, $9 на рівень при 1:500). Чим вище плече — тим менше маржі займає один рівень і тим більше рівнів сітки може вмістити депозит.</p>
+<table>
+<tr><th>Плече</th><th>Маржа 0.01 лота XAUUSD @ $4500</th><th>Рівнів при депо $1 000</th><th>Рівнів при $5 000</th></tr>
+<tr><td>1:30 (EU regul.)</td><td>$150.00</td><td>~6</td><td>~33</td></tr>
+<tr><td>1:50 (US regul.)</td><td>$90.00</td><td>~11</td><td>~55</td></tr>
+<tr><td>1:100</td><td>$45.00</td><td>~22</td><td>~110</td></tr>
+<tr><td>1:200</td><td>$22.50</td><td>~44</td><td>~200+</td></tr>
+<tr><td>1:500</td><td>$9.00</td><td>~110</td><td>~200+ (обмежується <code>MaxLevels</code>)</td></tr>
+<tr><td>1:1000</td><td>$4.50</td><td>~200+</td><td>~200+ (обмежується <code>MaxLevels</code>)</td></tr>
+<tr><td>1:2000</td><td>$2.25</td><td>~200+</td><td>~200+ (обмежується <code>MaxLevels</code>)</td></tr>
+</table>
+<p class="muted">Кількість рівнів — теоретична стеля за маржею (депозит ÷ маржа рівня). Реальну глибину сітки додатково обмежують <code>AutoSizing_MaxLevels</code> (за замовчуванням 50) та правило ≤30–40% маржі (див. нижче). Конкретні цифри залежать від поточної ціни золота, маржинальних вимог брокера та валюти рахунку. У секції <b>SIZING</b> панелі ви завжди бачите фактичну маржу повної сітки під ваші поточні налаштування.</p>
+
+<h4>Тип рахунку</h4>
+<table>
+<tr><th>Тип</th><th>Особливості</th><th>Вплив на радника</th></tr>
+<tr><td><b>Standard</b></td><td>Спред всередині котирування, без окремої комісії</td><td>Підходить ідеально. Просто закладіть середній спред (зазвичай 20–35 pt на золото) в δ-калібрування профілю.</td></tr>
+<tr><td><b>ECN / Raw</b></td><td>Малий спред (1–5 pt) + окрема комісія (~$3–7 за лот round-turn)</td><td>Найбільш ефективний для частих TP. У панелі <b>LIVE → Commission</b> ви бачите фактичну комісію поточних позицій. Може знадобитися трохи підняти <code>TakeProfitUSD</code>, щоб повністю перекривати комісію.</td></tr>
+<tr><td><b>Cent</b></td><td>1 «лот» = 1000 одиниць замість 100 000 (XAUUSD: 1 центовий лот ≈ 0.001 стандартного)</td><td>На центових рахунках <code>LotSize=0.01</code> ≈ мікро-обсяг угоди. Можна безпечно тестувати стратегію на копійках. <b>Lot Scaling</b> допоможе потім перейти на стандартний рахунок без переналаштування параметрів.</td></tr>
+<tr><td><b>Hedging</b></td><td>Можна тримати buy та sell позиції одночасно</td><td>Повна функціональність. Можна запускати <b>дві копії</b> радника з різними Magic — одну на buy-only, іншу на sell-only.</td></tr>
+<tr><td><b>Netting</b></td><td>На один інструмент — одна сумарна позиція в ринку</td><td>Також працює, але менш гнучко: ручний BUY на активній SELL-сітці закриє частину поточної позиції. Враховуйте це при ручному втручанні.</td></tr>
+</table>
+
+<h4>Підбір LotSize під депозит + плече</h4>
+<p>Універсальне правило: <b>зайнята маржа повної сітки ≤ 30–40% депозиту</b>. Це залишає 60–70% вільної маржі під просадку (worst-case float).</p>
+<table>
+<tr><th>Депозит</th><th>Плече 1:30</th><th>Плече 1:100</th><th>Плече 1:500</th><th>Рекомендований сценарій</th></tr>
+<tr><td>$300–500</td><td>0.01 (10 lvl)</td><td>0.01 (30 lvl)</td><td>0.01 (50 lvl)</td><td>NORMAL / SPIKE_M, режим CAP</td></tr>
+<tr><td>$1 000</td><td>0.01 (15 lvl)</td><td>0.01 (50 lvl)</td><td>0.02 (50 lvl)</td><td>SPIKE_M, ADVISORY або CAP</td></tr>
+<tr><td>$5 000</td><td>0.02 (30 lvl)</td><td>0.03 (60 lvl)</td><td>0.05 (80 lvl)</td><td>SPIKE_M / SPIKE_L, режим FULL</td></tr>
+<tr><td>$10 000+</td><td>0.05</td><td>0.10</td><td>0.20+</td><td>Будь-який, FULL, можна підключити <code>VirtualBalanceUSD</code> для передбачуваності</td></tr>
+</table>
+
+<div class="info">
+<b>Lot Scaling × різні депозити.</b> Головна перевага v3.572 — один і той самий набір налаштувань працює як на $1k, так і на $100k. Якщо на невеликому депозиті ви відпрацювали стратегію на лоті 0.01 з TP=$4, то при переході на $100k та лоті 0.5 радник автоматично виставить TP=$200, SL=$45000 (×50 від опорного 0.01). Не потрібно нічого перераховувати вручну. Це знімає традиційні складнощі при скейлінгу капіталу.
+</div>
+
+<div class="warn">
+<b>Margin Call risk.</b> Брокери з плечем 1:30 (EU регулювання) та фіксованим Stop-Out 50% — найжорсткіший режим для сіткових стратегій. На таких рахунках встановлюйте <b>SPIKE_L</b> або <b>BLACK SWAN</b> за замовчуванням і тримайте <code>MaxDrawdownUSD</code> на рівні 3–5% від депозиту. Смуга Margin Call у шапці панелі — ваш головний індикатор: при зниженні в червону зону (&lt;30%) — закривайте частину сітки руками.
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  5. СЦЕНАРИИ                                       -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="scenarios">5. Сценарії використання</h2>
+
+<p>Mercaria Unicorn — це не просто «однокнопковий робот», а гнучкий інструмент. Можна віддати йому всю роботу, можна підключатися лише у важливі моменти, можна взагалі залишити за собою всі рішення та використовувати його виключно як менеджер позиції. Нижче наведено три робочі сценарії: <b>повна автоматизація</b>, <b>часткова (напівавтомат з перемиканням профілів)</b>, <b>ручне керування з автосупроводом</b>. З числовими прикладами під типові депозити.</p>
+
+<!-- ─── A. ПОЛНАЯ АВТОМАТИЗАЦИЯ ─── -->
+<h3>5.1. Повна автоматизація — для початківців та пасивного режиму</h3>
+<p><b>Підходить:</b> трейдер не хоче або не може сидіти біля графіка, потрібен «робот, який працює сам». Базовий сценарій для тих, хто тільки починає роботу.</p>
+
+<h4>Налаштування</h4>
+<ol>
+  <li><code>AutoSizing_Mode</code> = <b>CAP</b> — радник сам підбере безпечну кількість рівнів. Лот залишається таким, як ви вказали в <code>LotSize</code>.</li>
+  <li><code>AutoSizing_Scenario</code> = <b>SPIKE_M</b> — універсальний профіль на випадок новин всередині дня.</li>
+  <li><code>MaxDrawdownUSD</code> = 5–7% від депозиту (див. таблицю нижче).</li>
+  <li><code>UseProfitProtect</code> = <b>true</b>, <code>ProfitProtectDropPct</code> = <b>25</b> (раннє закриття, фіксуємо прибуток агресивніше).</li>
+  <li><code>TargetProfitUSD</code> = 2–3% від депозиту (радник автоматично вимкнеться при досягненні цієї цілі).</li>
+  <li><code>UseLotScaling</code> = <b>true</b> — всі пороги адаптуються під обраний лот.</li>
+</ol>
+
+<h4>Конкретні цифри під типові депозити</h4>
+<table>
+<tr><th>Депозит</th><th>LotSize</th><th>MaxDrawdownUSD</th><th>TakeProfitUSD</th><th>TargetProfitUSD</th><th>Маржа сетапу<br>(приблизно)</th><th>Денна ціль</th></tr>
+<tr><td>$300</td><td>0.01</td><td>$20</td><td>$2.0</td><td>$6–9</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$500</td><td>0.01</td><td>$35</td><td>$3.0</td><td>$10–15</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$1 000</td><td>0.01</td><td>$60</td><td>$4.0</td><td>$20–30</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$3 000</td><td>0.02</td><td>$200</td><td>$6.0</td><td>$60–90</td><td>$200–280</td><td>2–3%</td></tr>
+<tr><td>$10 000</td><td>0.05</td><td>$700</td><td>$15.0</td><td>$200–300</td><td>$500–700</td><td>2–3%</td></tr>
+</table>
+<p class="muted">Маржа сетапу — оцінка при кредитному плечі 1:100 для золота. Уточнюйте у брокера. Прибуток на пул показаний з урахуванням Lot Scaling (×1, ×2, ×5).</p>
+
+<div class="tip">
+<b>Реалістичне очікування денного доходу:</b> робот робить від 5 до 20 пулів на день залежно від волатильності. При середньому виході за допомогою trail/profit-protect ≈ TakeProfit × 1.2, очікуваний денний валовий PnL ≈ <code>N_pools × TakeProfit × 1.2</code>. На $1 000 при 10 пулах на день: 10 × $4 × 1.2 ≈ <b>$48 (≈ 4.8%)</b>. Це стеля «спокійного» дня; при цьому ціль <code>TargetProfitUSD = $20–30</code> досягається за півдня, і радник зупиняється сам.
+</div>
+
+<!-- ─── B. ЧАСТИЧНАЯ ─── -->
+<h3>5.2. Частична — режим керування профілем за календарем новин</h3>
+<p><b>Підходить:</b> трейдер з досвідом 1–2 роки, який стежить за економічним календарем <code>investing.com</code> та розуміє різницю між CPI/FOMC/NFP. Найбільш ефективний режим.</p>
+
+<h4>Ідея</h4>
+<p>Вранці перед початком сесії ви оцінюєте «температуру дня» та обираєте відповідний профіль волатильності (NORMAL / SPIKE_M / SPIKE_L / BLACK SWAN). Протягом дня перемикаєте його кліком на панелі — радник миттєво перераховує безпечний sizing.</p>
+
+<h4>Денний workflow</h4>
+<ol>
+  <li><b>Підготовка (7–9:00 GMT):</b> дивіться календар:
+    <ul>
+      <li>День порожній / тільки дрібні події — <b>NORMAL</b>.</li>
+      <li>Сьогодні CPI / FOMC / ECB → стартуєте на <b>NORMAL</b>, за 30–60 хв до виходу новин перемикаєте на <b>SPIKE_M</b>.</li>
+      <li>Сьогодні NFP / виступ Пауелла з сюрпризом → вранці ставите <b>SPIKE_L</b>.</li>
+      <li>Геополітичні події, банківська криза, форс-мажор → <b>BLACK SWAN</b>.</li>
+    </ul>
+  </li>
+  <li><code>AutoSizing_Mode</code> = <b>FULL</b> — радник сам вираховує оптимальний N×лот під обраний профіль.</li>
+  <li>Після «гарячого вікна» (через 1–2 години після виходу новин) — повертаєте <b>NORMAL</b>, щоб радник знову працював агресивніше на спокійному ринку.</li>
+  <li>Ціль сесії (<code>TargetProfitUSD</code>) — 3–5% від депозиту. Після її досягнення — авто-стоп до завтра.</li>
+</ol>
+
+<h4>Конкретний приклад: депозит $1 000, день FOMC</h4>
+<table>
+<tr><th>Час</th><th>Подія</th><th>Профіль</th><th>Що робить радник</th></tr>
+<tr><td>08:00</td><td>Ранок спокійний</td><td><span class="pill gn">NORMAL</span></td><td>50 × 0.01 lot, TP ≈ $4, SL ≈ $60</td></tr>
+<tr><td>13:00</td><td>Година до FOMC</td><td><span class="pill or">SPIKE_M</span></td><td>Перемикання → 35 × 0.01 lot (менше рівнів, більший δ-запас)</td></tr>
+<tr><td>14:00</td><td>Публікація FOMC</td><td><span class="pill or">SPIKE_M</span></td><td>Спайк відпрацьовується із запасом, recovery спрацьовує коректно</td></tr>
+<tr><td>16:00</td><td>Ринок заспокоївся</td><td><span class="pill gn">NORMAL</span></td><td>Повернення на агресивний профіль, добір плану по прибутку</td></tr>
+<tr><td>~18:00</td><td>Ціль сесії досягнута</td><td>—</td><td>$30 закритого прибутку (3%) → AUTO OFF</td></tr>
+</table>
+
+<div class="info">
+<b>Чому це працює.</b> Більшість сіткових стратегій втрачають депозит на одному невдалому вході перед сильною новиною. Mercaria Unicorn вирішує цю проблему: ви знаєте, що сьогодні вихід FOMC → перемикаєте профіль → радник на льоту зменшує кількість рівнів та збільшує крок сітки. Ціновий імпульс пройде навіть великий спайк, не вибиваючи SL пулу.
+</div>
+
+<!-- ─── C. РУЧНОЕ УПРАВЛЕНИЕ ─── -->
+<h3>5.3. Ручне керування — для професіоналів</h3>
+<p><b>Підходить:</b> трейдер зі власною стратегією входів (price action, технічні рівні, потокова аналітика). Mercaria Unicorn використовується виключно як <b>менеджер позиції</b>, а не як генератор сигналів.</p>
+
+<h4>Ідея</h4>
+<p>Ви самі вирішуєте, «коли заходити» за своєю системою. Робот:</p>
+<ul>
+  <li>не відкриває нові сетапи самостійно (ви натиснули OFF);</li>
+  <li>але як тільки ви натиснули BUY або SELL — бере позицію на супровід за своєю логікою:
+    <ul>
+      <li>при русі проти угоди → додає рівні сітки (recovery);</li>
+      <li>при русі в плюс → захищає прибуток трейлом + відсотковим захистом;</li>
+      <li>закриває всю сітку по TP / SL / трейлу автоматично.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Налаштування</h4>
+<ol>
+  <li>На панелі натисніть <b>OFF</b> — жодних автоматичних входів за сигналами.</li>
+  <li><code>AutoSizing_Mode</code> = <b>OFF</b> — всі параметри ваші, радник не втручається в sizing.</li>
+  <li>Налаштуйте <code>LotSize</code>, <code>MaxDrawdownUSD</code>, <code>PyramidTrailStart/Step</code>, <code>ProfitProtectMinUSD/DropPct</code> під вашу стратегію.</li>
+  <li>Коли бачите хороший вхід — кнопкою <b>BUY</b> або <b>SELL</b> на панелі відкриваєте позицію обраним лотом.</li>
+  <li>Далі робот веде її сам. Ви можете в будь-який момент закрити позиції кнопкою <b>X CLOSE</b> (з підтвердженням) або <b>PANIC</b> (без підтвердження).</li>
+</ol>
+
+<h4>Конкретний приклад: трейдер з тех. аналізом, депозит $5 000</h4>
+<table>
+<tr><th>Час</th><th>Дія</th><th>Стан сітки</th><th>Float</th></tr>
+<tr><td>10:15</td><td>Ціна торкнулася підтримки 4520, ваш сигнал на покупку → клік <b>BUY</b></td><td>1 × 0.03 lot @ 4520</td><td>$0</td></tr>
+<tr><td>10:30</td><td>Ціна просіла до 4515, радник сам додав рівень recovery</td><td>2 × 0.03 lot, avg 4517.5</td><td>−$15</td></tr>
+<tr><td>11:00</td><td>Ціна розвернулася, дійшла до 4525, прибуток зріс до +$15 (pyramid peak)</td><td>2 × 0.03 lot, avg 4517.5</td><td>+$15</td></tr>
+<tr><td>11:15</td><td>Прибуток відкотився до +$10.5 (−30% від піку) → Profit Protect закрив сітку</td><td>—</td><td>+$10.5 ✓</td></tr>
+</table>
+
+<div class="info">
+<b>Тонкий момент.</b> При ручному вході радник все одно використовує логіку Lot Scaling. Тобто якщо ви заходите лотом 0.03 при <code>BaseLotReference=0.01</code>, радник автоматично розраховує: TP = $4 × 3 = $12, SL = $60 × 3 = $180. Не потрібно вручную перераховувати пороги під кожен лот.
+</div>
+
+<!-- ─── ДЕМО ─── -->
+<h3>5.4. Демонстрація / запис відео</h3>
+<p>Якщо показуєте термінал клієнту, партнеру, в навчальному відео — переведіть панель у режим тільки-перегляд:</p>
+<ol>
+  <li>Натисніть <b>👁 READ OFF</b> — кнопка стане червоною «👁 READ ON».</li>
+  <li>Випадкові кліки в кадрі тепер нічого не зламають — всі кнопки заблоковані.</li>
+  <li>Для повернення в робочий режим натисніть кнопку ще раз.</li>
+</ol>
+<p>Альтернатива для серйозного захисту: <b>🔒 LOCK</b> — заблокувати тільки action-кнопки (BUY/SELL/CLOSE/RESET), залишивши автоторгівлю та згортання секцій.</p>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  6. TIPS                                           -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="tips">6. Поради та фішки</h2>
+
+<div class="grid">
+  <div class="card green">
+    <h4>Почніть на демо мінімум 2 сесії</h4>
+    <p>Один день на NORMAL, один — на SPIKE_M у день новин. Запишіть у STATS середнє закриття пулу, win rate та max drawdown — це ваша «база».</p>
+  </div>
+  <div class="card gold">
+    <h4>Використовуйте секцію SIZING як калькулятор</h4>
+    <p>У режимі <code>ADVISORY</code> ви бачите «Recommended setups» — таблицю з необхідним депозитом під кожен з 4 профілів. Зручно розуміти, на що вистачає поточного балансу.</p>
+  </div>
+  <div class="card blue">
+    <h4>Стежте за Margin Call bar</h4>
+    <p>Якщо смуга йде в помаранчеву і тим більше червону зону — це сигнал, що обраний sizing для поточного руху занадто агресивний. Подумайте про зниження лота або перехід на більш «важкий» профіль (SPIKE_L / BSW).</p>
+  </div>
+  <div class="card orange">
+    <h4>«Recent max move» у STATS</h4>
+    <p>Цей рядок показує, наскільки великі цінові рухи реально траплялися на інструменті за останні пули. Якщо його значення наближається до параметру обраного профілю — пора переходити на профіль вище.</p>
+  </div>
+  <div class="card red">
+    <h4>LOCK перед важливим дзвінком</h4>
+    <p>Якщо знаєте, що відійдете від комп'ютера або очікуєте, що вас відволікатимуть — заблокуйте панель. Сітка продовжує працювати, ризик-виходи також, але випадковим кліком нічого не зупините.</p>
+  </div>
+  <div class="card purple">
+    <h4>Один magic = один радник</h4>
+    <p>Якщо запускаєте 2 копії на різних символах — кожній задайте свій <code>InputMagic</code>. Інакше вони почнуть «бачити» позиції одна одної.</p>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  7. FAQ                                            -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="faq">7. FAQ</h2>
+
+<h3>Який мінімальний депозит потрібен?</h3>
+<p>Мінімально робочий — <b>$300</b> при <code>LotSize=0.01</code> та профілі <b>NORMAL</b>. Комфортний для більшості брокерів — <b>$500–1 000</b>. Точні вимоги під кожен з 4 профілів ви завжди бачите в секції <b>SIZING</b> → «Recommended setups» на панелі. Див. таблицю в §5.1 для типових конфігів під $300/$500/$1k/$3k/$10k.</p>
+
+<h3>Що нового у v3.572?</h3>
+<ul>
+  <li><b>Profit-to-SL Bonus</b> (§4.6) — опціональна подушка SL із закритого прибутку.</li>
+  <li><b>Lot Scaling</b> (§4.7) — TP/SL/трейл/захист автоматично масштабуються під поточний лот.</li>
+  <li><b>VirtualBalanceUSD</b> — фіксований віртуальний баланс для розрахунків AutoSizing.</li>
+  <li><b>Авто-рестарт сесії</b> — після досягнення цілі натискання ON запускає нову сесію.</li>
+  <li><b>Технічні покращення</b> — підвищено точність обліку Session PnL та стабільність під час перезапуску/видалення радника; доопрацьовано інтерфейс вхідних параметрів.</li>
+</ul>
+
+<h3>На яких інструментах працює?</h3>
+<p>Оптимізований під XAUUSD. Придатний для будь-якого CFD з налаштуванням <code>GridStepPoints</code> під волатильність інструменту. Не рекомендую запускати на криптоактивах без ретельного налаштування — занадто висока базова волатильність.</p>
+
+<h3>На якому таймфреймі графіка запускати?</h3>
+<p>Будь-який. Логіка радника не залежить від ТФ графіка, на якому він встановлений. Найзручніше використовувати M5 або M15 для візуального контролю.</p>
+
+<h3>Що робить кнопка RESET?</h3>
+<p>Повністю скидає поточну сесію: обнуляє Closed PnL, Pools closed, Win rate, Streak, Max drawdown, та встановлює нову точку відліку для Session% (поточний баланс стає «стартом сесії»). **Не закриває позиції** — це роблять X CLOSE та PANIC. Використовується для початку «чистої сесії» (наприклад, після досягнення денної цілі або перед початком нового торгового дня).</p>
+
+<h3>Що станеться, якщо я натисну ON після досягнення цілі сесії?</h3>
+<p>Радник автоматично розпізнає, що попередня сесія закрита за <code>TargetProfitUSD</code> (або за лімітом SL <code>MaxLossCount</code>), і при натисканні ON <b>запустить нову сесію</b> — обнулить Session/Closed PnL/Pools і почне рахувати заново. Ціль прибутку (TargetProfitUSD) активується заново.</p>
+
+<h3>Що станеться, якщо я перемкну режим/профіль під час активної сітки?</h3>
+<p>Уже відкрита сітка продовжить супроводжуватися за тими параметрами, з якими була відкрита. Зміни застосуються до <b>наступного</b> пулу. Тобто перемикання «на льоту» безпечні.</p>
+
+<h3>Що означає «AUTO OFF»?</h3>
+<p>Автоторгівлю вимкнено. Поточна відкрита сітка <b>продовжить супроводжуватися</b> до закриття по TP/SL/трейлу/захисту прибутку. Але нових сетапів за сигналами відкриватися не буде. Це «м'яке вимкнення» — закінчити те, що є в ринку, і не починати нове.</p>
+
+<h3>Чим PANIC відрізняється від X CLOSE?</h3>
+<p><b>PANIC</b> — миттєве закриття без підтвердження. Один клік = зроблено. <b>X CLOSE</b> — подвійний клік з підтвердженням (CONFIRM?). PANIC швидше, але є ризик випадково натиснути кнопку.</p>
+
+<h3>Що таке Lot Scaling і навіщо він потрібен?</h3>
+<p>Коли радник працює з лотом, відмінним від опорного (<code>BaseLotReference</code>, за замовчуванням 0.01), всі USD-пороги (TP, SL, трейл, захист прибутку) автоматично множаться на коефіцієнт <code>active_lot / BaseLotReference</code>. Це означає, що один і той самий ризик-профіль працює на будь-якому депозиті — не потрібно вручну перераховувати параметри при зміні лота. <b>TargetProfitUSD</b> залишається абсолютним (його ви встановлюєте самі).</p>
+
+<h3>Що таке VirtualBalanceUSD?</h3>
+<p>Віртуальний баланс для розрахунків AutoSizing. Якщо <code>VirtualBalanceUSD = 0</code> — використовується реальний баланс рахунку. Якщо задано (наприклад 1000) — радник робить всі розрахунки так, ніби на рахунку $1 000, навіть якщо реальний баланс інший. Зручно: (а) для копіювання налаштувань між рахунками з різними балансами, (б) для регулювання агресивності (поставте virtual менше реального — отримаєте консервативніший sizing). У секції SIZING ви побачите «(virt)» поруч із балансом, коли це увімкнено.</p>
+
+<h3>Чи зберігаються мої налаштування панелі?</h3>
+<p>Так. Позиція панелі, стан LOCK / READ ONLY, які секції згорнуті — все зберігається між перезапусками радника та терміналу. Стан записується в Global Variables MT5.</p>
+
+<h3>Що означає «cooldown»?</h3>
+<p>Після закриття пулу радник пару секунд «відпочиває» — це технічна пауза, щоб коректно завершити всі операції з брокером та не відкрити нову позицію поверх старої, яка ще не встигла закритися.</p>
+
+<h3>Як оновити радник до нової версії з MQL5 Market?</h3>
+<p>MQL5 Market сам сповіщає про оновлення. У терміналі <b>Toolbox → Market → Purchases → Mercaria Unicorn → Update</b>. Поточна сітка та налаштування зберігаються (Global Variables не скидаються). Після оновлення радник перезапускається на тих самих графіках.</p>
+
+<h3>Що показує «Distance to MC» у секції RISK?</h3>
+<p>Відстань у пунктах від поточної ціни до margin call вашого брокера. Колірні позначки: <span class="pill gn">зелений</span> — безпечно (більше 500 pt запасу), <span class="pill or">помаранчевий</span> — увага (200–500 pt), <span class="pill rd">червоний</span> — критично (менше 200 pt). При червоному статусі радник все ще працює, але є сенс зменшити лот або перемкнути профіль на більш консервативний.</p>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  DISCLAIMER                                        -->
+<!-- ────────────────────────────────────────────────── -->
+<hr>
+<div class="disclaimer">
+<b>Disclaimer.</b> Mercaria Unicorn EA — інструмент торговельної автоматизації. Минулі результати не гарантують майбутньої прибутковості. Сіткові стратегії пов'язані з ризиком значної плаваючої просадки в умовах тривалих односпрямованих рухів. Трейдер несе повну відповідальність за вибір профілю ризику, розміру депозиту, кредитного плеча та застосування захисних режимів (Lock, MaxDrawdownUSD, MaxLossCount). Перед торгівлею на реальному рахунку обов'язково є тестування у тестері стратегій MT5 та на демо-рахунку мінімум 1–2 торгові сесії.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+⚠️  ATTENZIONE — PREZZO DI LANCIO LIMITATO
+
+Il prezzo aumenta ogni 10 copie vendute su MQL5 Market.
+Il prezzo finale sarà 3–4 volte più alto di quello di partenza.
+Acquista ora — ricevi tutti gli aggiornamenti futuri gratuitamente.
+
+═══════════════════════════════════════════════════════
+
+                    MERCARIA UNICORN
+         Adaptive Grid Trading System
+              XAUUSD · MetaTrader 5
+
+  Creato da trader professionisti con anni
+        di esperienza sui mercati
+            per ogni livello di preparazione
+
+═══════════════════════════════════════════════════════
+
+
+Mercaria Unicorn non è "l'ennesima grid", ma un sistema di trading adattivo per Oro (XAUUSD) e altri strumenti CFD. A differenza dei robot grid standard con parametri fissi, l'Expert Advisor regola automaticamente il numero di livelli, la dimensione del lotto e le soglie di rischio in base al profilo di volatilità selezionato e al saldo del conto.
+
+Tutte le decisioni critiche sono esposte su un pannello di controllo visivo sul grafico — nessun riavvio F7 per cambiare impostazioni al volo. Adatto a chi vuole "imposta e dimentica", a trader esperti che gestiscono il rischio secondo il calendario delle notizie, e a professionisti che necessitano di un position manager intelligente sopra la propria strategia di entrata.
+
+
+═══════════════════════════════════════════════════════
+   CARATTERISTICHE PRINCIPALI
+═══════════════════════════════════════════════════════
+
+▸ 4 PROFILI DI VOLATILITÀ
+  NORMAL, SPIKE_M, SPIKE_L, BLACK SWAN. Per giornate tranquille, giornate di notizie (CPI/FOMC), sorprese NFP e situazioni di crisi. Cambio con un click dal pannello, senza riavvio.
+
+▸ AUTOSIZING ADATTIVO
+  L'EA calcola il numero sicuro di livelli e la dimensione del lotto per il tuo saldo. Niente "indovina-prova", solo un modello matematico con buffer di sicurezza integrato.
+
+▸ LOT SCALING
+  Tutte le soglie USD (TP, SL, trail, profit protection) scalano automaticamente con il lotto attivo. La stessa configurazione funziona su depositi da $300 e da $30.000 — senza ricalcoli manuali.
+
+▸ PROTEZIONE DEL PROFITTO A DUE LIVELLI
+  Prima scatta la protezione percentuale (calo dal picco), poi il trail USD. Impedisce al profitto di "tornare a zero".
+
+▸ PROFIT-TO-SL BONUS
+  Meccanismo opzionale: una parte del profitto chiuso va nel "cuscinetto" SL del pool. Reinvestimento dei guadagni nell'assicurazione, senza rischiare il capitale base.
+
+▸ PANNELLO DI CONTROLLO VISIVO
+  6 sezioni (Live, Sizing, Grid, Risk, Stats, Log). Pilotato a pulsanti, con protezione contro click accidentali (LOCK), modalità solo lettura (READ ONLY), chiusura d'emergenza (PANIC).
+
+▸ PROTEZIONE DEL CONTO MULTI-LIVELLO
+  SL pool rigido in USD, limite SL-hit per sessione, auto-stop al raggiungimento dell'obiettivo di sessione, indicatore visivo della distanza dal Margin Call.
+
+▸ STATISTICHE COMPLETE IN TEMPO REALE
+  Win rate, Avg pool PnL, Closed PnL al centesimo coincidente con il saldo, Streak, Max drawdown, Pools today.
+
+
+═══════════════════════════════════════════════════════
+   A CHI È DESTINATO
+═══════════════════════════════════════════════════════
+
+▸ TRADER PRINCIPIANTI
+  Preset pronti "imposta e dimentica". Modalità AutoSizing CAP + profilo base SPIKE_M + auto-stop sull'obiettivo giornaliero. L'EA limita il rischio al tuo deposito. Devi solo impostare l'obiettivo di profitto giornaliero e osservare dal pannello.
+
+▸ TRADER CON 1–2 ANNI DI ESPERIENZA
+  Modalità semi-automatica. Segui il calendario economico e cambi il profilo di volatilità con un click prima delle notizie importanti. La mattina NORMAL, prima del FOMC SPIKE_M, nel giorno NFP SPIKE_L. L'EA ricalcola istantaneamente il sizing sicuro per il modello scelto.
+
+▸ TRADER PROFESSIONISTI
+  Mercaria Unicorn si usa come position manager. Apri le operazioni con la tua strategia (price action, analisi tecnica, news trading), e l'EA gestisce ogni posizione automaticamente: aggiunge livelli sui movimenti avversi, protegge il profitto col trailing, chiude secondo regole disciplinate. Nessuna decisione emotiva nei momenti caldi del mercato.
+
+
+═══════════════════════════════════════════════════════
+   GRUPPI DI PARAMETRI (F7)
+═══════════════════════════════════════════════════════
+
+Tutte le impostazioni sono organizzate logicamente in 11 gruppi. La maggior parte degli utenti tocca solo i primi due.
+
+▸ Main — Magic, LotSize, GridStepPoints, MaxGridLevels, TakeProfitUSD, MaxDrawdownUSD, MinPauseBetweenOrders. Meccanica grid di base e limiti di rischio.
+
+▸ AutoSizing — Mode (OFF / ADVISORY / CAP / FULL), Scenario, SafetyBuffer, MinLevels, MaxLevels, MaxLot, RescaleDown. Calcolo dinamico di N×lotto per deposito e scenario.
+
+▸ Risk Scenarios — δ-overrun in points per ciascuno dei 4 profili, coefficiente di calibrazione, cap del lotto per scenario. Messa a punto del modello adattivo per un broker specifico.
+
+▸ Pyramid & Recovery — UsePyramidTrail, PyramidTrailStart, PyramidTrailStep. Trail USD sul picco del profitto floating.
+
+▸ Profit Protection — UseProfitProtect, ProfitProtectMinUSD, ProfitProtectDropPct. Protezione percentuale del profitto al calo dal picco.
+
+▸ Profit-to-SL Bonus — UseProfitToSLBonus, ProfitToSLPercent, ProfitToSLCapUSD. Cuscinetto SL opzionale dal profitto chiuso.
+
+▸ Lot Scaling — UseLotScaling, BaseLotReference, GridTPGrowthPercent, VirtualBalanceUSD. Adattamento di TP/SL/trail al lotto corrente.
+
+▸ Candle Filter — filtro per direzione della candela.
+
+▸ Entries per candle — limite di entrate per singola candela. Protezione contro l'over-trading.
+
+▸ Session — TargetProfitUSD (obiettivo giornaliero), MaxLossCount (limite SL di sessione). Al raggiungimento di uno qualsiasi l'EA si ferma automaticamente.
+
+▸ Visual — dimensione carattere e font del pannello.
+
+Descrizioni complete di ogni parametro con esempi e valori consigliati nel manuale utente online (link in fondo).
+
+
+═══════════════════════════════════════════════════════
+   PANNELLO DI CONTROLLO
+═══════════════════════════════════════════════════════
+
+La finestra di controllo principale è un pannello visivo sul grafico. 6 sezioni espandibili più un header fisso con i comandi.
+
+▸ HEADER
+  Stato, Float / Equity, Session PnL con barra di progresso all'obiettivo, pulsanti ON / OFF / BUY / SELL / PANIC / X CLOSE / RESET, LOCK / MOVE / READ ON-OFF, indicatore Margin Call. Lo sfondo del pannello cambia colore con la crescita del drawdown (5 livelli).
+
+▸ LIVE
+  Candela H1 corrente, contatore entrate per candela, spread (corrente / medio / massimo), commissione sulle posizioni aperte.
+
+▸ SIZING
+  Balance / Leverage, 4 pulsanti Mode × 4 pulsanti Scenario per cambio al volo, sizing attivo (N × lotto × moltiplicatore), δ dello scenario selezionato, margin totale necessario per la grid, previsione worst-case, raccomandazioni per 4 scenari con deposito richiesto.
+
+▸ GRID
+  Direzione della grid attiva, livelli aperti (X / max), prezzo medio di entrata, PnL del pool, volume totale, prezzo del prossimo livello e distanza.
+
+▸ RISK
+  Margin di setup in USD e % del saldo, free margin, margin level, distanza dal Margin Call in points e USD, SL buffer corrente (se Profit-to-SL Bonus attivo).
+
+▸ STATS
+  Closed PnL (al centesimo con il saldo), Pools closed (split profit/loss), SL hits, Max drawdown, Trail peak con barra, Pools today, Streak, Win rate, Avg pool, massimo movimento sui pool recenti.
+
+▸ LOG
+  Journal scorrevole degli ultimi 8 eventi dell'EA (TP, SL, trail, profit protect, azioni manuali).
+
+
+═══════════════════════════════════════════════════════
+   SCENARI D'USO
+═══════════════════════════════════════════════════════
+
+▸ AUTOMAZIONE COMPLETA
+  Per chi non ha tempo di guardare il grafico.
+  Setup: Mode = CAP, Scenario = SPIKE_M, TargetProfit = 2–3% del deposito.
+
+▸ GUIDATO DAL CALENDARIO NEWS
+  Per 1–2 anni di esperienza, briefing mattutino.
+  Setup: Mode = FULL, mattina NORMAL, prima delle news SPIKE_M o SPIKE_L.
+
+▸ MANUALE + AUTO-GESTIONE
+  Per pro con propria strategia di entrata.
+  Setup: Mode = OFF, pulsante AUTO OFF, BUY/SELL manuali su segnale.
+
+▸ DEMO / REGISTRAZIONE
+  Per mentor, partner, contenuti video.
+  Setup: un click su READ ON — pannello in modalità sola lettura.
+
+
+═══════════════════════════════════════════════════════
+   REQUISITI MINIMI
+═══════════════════════════════════════════════════════
+
+  Piattaforma:       MetaTrader 5
+  Strumento:         XAUUSD (Oro) — ottimale
+  Tipo di conto:     Hedging (consigliato) o Netting
+  Timeframe grafico: qualsiasi (la logica non dipende dal TF del grafico)
+  Deposito minimo:   $300 (NORMAL, 0,01 lotto) · ottimale da $1.000
+  Leva finanziaria:  1:100 e superiore
+  Connessione:       VPS consigliato ma non obbligatorio
+
+
+CONSIGLIATO PER I MIGLIORI RISULTATI:
+
+✓ Deposito da $1.000 — dà spazio a tutti i 4 profili e alla modalità FULL AutoSizing
+✓ Tipo di conto ECN / Raw spread — spread basso (1–5 pt), critico per uscite TP frequenti
+✓ Commissioni Oro basse (non oltre $5 per lotto round-turn)
+✓ Broker con esecuzione veloce (senza re-quote frequenti)
+✓ Test su demo per almeno 1–2 sessioni di trading prima del live
+
+
+═══════════════════════════════════════════════════════
+   PIANO DI VALUTAZIONE CONSIGLIATO
+═══════════════════════════════════════════════════════
+
+Per valutare correttamente l'EA nelle tue condizioni:
+
+1. Acquista il prodotto su MQL5 Market. Dopo l'acquisto comparirà automaticamente nel tuo terminale.
+
+2. Crea un conto demo con saldo di $10.000 presso il tuo broker. Tipo di conto — preferibilmente Hedging (cent o standard irrilevante per il test della meccanica).
+
+3. Testa in sequenza con leve diverse: 1:100, 1:500, 1:1000, 1:2000, 1:3000. Questo dà un quadro completo di come i livelli grid disponibili e il comportamento dell'AutoSizing cambino con i diversi requisiti di margine dei broker.
+
+4. Fai girare almeno 1–2 sessioni complete di trading in condizioni di mercato reali. Non nello Strategy Tester — lì i risultati sono incompleti (vedi sotto).
+
+5. Traccia le tue metriche: Win rate, Avg pool, Max drawdown, Pools today. Tutto visibile in tempo reale nella sezione STATS del pannello.
+
+6. Apri il manuale utente online dettagliato — aiuta a interpretare correttamente il comportamento e a scegliere parametri per il tuo stile di trading.
+
+7. Solo dopo demo riuscita passa al conto live. Inizia col lotto minimo (0,01) e aumenta gradualmente man mano che accumuli statistica.
+
+
+═══════════════════════════════════════════════════════
+   IMPORTANTE SUL STRATEGY TESTER
+═══════════════════════════════════════════════════════
+
+Il test nello Strategy Tester standard di MetaTrader 5 dà un quadro incompleto del funzionamento dell'EA. Questo perché:
+
+✗ A velocità superiori al 75%, il tester inizia a saltare tick, cosa critica per la logica grid sensibile ai movimenti precisi del prezzo.
+✗ Il tester non considera lo slippage reale e i cambi istantanei di spread durante le news.
+✗ Il trading virtuale dentro il tester può comportarsi diversamente dall'ambiente di esecuzione reale del broker.
+
+Se vuoi testare nello Strategy Tester — impostazioni obbligatorie:
+✓ Solo modalità visiva (Visual Mode = ON)
+✓ Velocità non superiore al 75%
+✓ Qualità di modellazione: Every tick based on real ticks
+
+IL METODO DI VALUTAZIONE MIGLIORE — test su conto demo con il feed di quotazioni reale. Dà il risultato più affidabile in tempo di trading reale.
+
+
+═══════════════════════════════════════════════════════
+   COSA È INCLUSO
+═══════════════════════════════════════════════════════
+
+✓ EA compilato Mercaria Unicorn v3.572 — si installa con un click da Navigator → Market
+✓ Manuale utente online completo sulla pagina dell'autore — descrizione dettagliata di tutti i parametri, sezioni del pannello, scenari, FAQ
+✓ Video tutorial sull'uso del pannello e la configurazione dell'EA (sul canale dell'autore)
+✓ Tutti gli aggiornamenti futuri — automatici tramite MQL5 Market, gratuiti per sempre
+✓ Supporto personale dell'autore — rispondo a domande sulle impostazioni via messaggi MQL5, di norma entro 24 ore
+✓ 5 attivazioni secondo standard MQL5 Market — per computer e VPS diversi
+
+
+═══════════════════════════════════════════════════════
+   MANUALE DETTAGLIATO E VIDEO
+═══════════════════════════════════════════════════════
+
+Documentazione utente completa, analisi dei parametri, checklist per ogni scenario — disponibili sulla pagina personale dell'autore:
+
+➜  https://www.mql5.com/en/users/empty.seeing/news
+
+Lì troverai anche video tutorial, panoramica degli aggiornamenti e risposte alle domande tipiche degli utenti. Iscriviti per ricevere notifiche sui nuovi materiali.
+
+
+═══════════════════════════════════════════════════════
+   AVVIO RAPIDO
+═══════════════════════════════════════════════════════
+
+1. Acquista il prodotto su MQL5 Market — comparirà automaticamente nel tuo terminale sotto Navigator → Market.
+2. Apri un grafico XAUUSD (qualsiasi timeframe).
+3. Trascina l'EA sul grafico. Nella finestra delle impostazioni lascia i valori predefiniti o regola MaxDrawdownUSD al tuo deposito (di norma 5–7% del saldo).
+4. Abilita AutoTrading nel terminale (toolbar superiore di MetaTrader 5).
+5. Osserva il pannello visivo dell'EA sul grafico. Tutto il controllo a pulsanti, niente F7.
+
+
+═══════════════════════════════════════════════════════
+   DETTAGLI TECNICI
+═══════════════════════════════════════════════════════
+
+  Versione:          3.572
+  Tipo:              Expert Advisor (EA) per MetaTrader 5
+  Profilo:           Strategia grid adattiva con gestione dinamica del rischio
+  Strumento target:  XAUUSD (applicabile ad altri CFD)
+  Magic number:      configurabile dall'utente (default 885533)
+  Lingua interfaccia: pannello e parametri — Inglese
+  Aggiornamenti:     automatico tramite MQL5 Market
+
+
+═══════════════════════════════════════════════════════
+   ⚠️  INFORMAZIONI IMPORTANTI SUL RISCHIO
+═══════════════════════════════════════════════════════
+
+Mercaria Unicorn è uno strumento di automazione del trading. I RISULTATI PASSATI NON GARANTISCONO RENDIMENTI FUTURI. Le strategie grid di trading comportano un rischio significativo di drawdown floating durante movimenti di mercato unidirezionali prolungati. Il trader si assume la piena responsabilità della scelta del profilo di rischio, della dimensione del deposito, della leva e dell'applicazione delle modalità di protezione (Lock, MaxDrawdownUSD, MaxLossCount, Profit Protection). PRIMA DEL TRADING SU CONTO LIVE, è obbligatorio un test su conto demo per almeno 1–2 sessioni di trading. Non utilizzare mai fondi la cui perdita sarebbe critica per te.
+
+
+═══════════════════════════════════════════════════════
+
+         Acquista ora al prezzo di lancio
+       Il prezzo aumenta ogni 10 copie vendute
+            Tutti gli aggiornamenti — gratuiti per sempre
+
+  Mercaria Unicorn · Adaptive Grid Trading System · MT5
+   Creato da trader professionisti con anni di esperienza sui mercati

@@ -1,0 +1,270 @@
+⚠️  DİKKAT — SINIRLI LANSMAN FİYATI
+
+Fiyat MQL5 Market'ta her 10 kopya satışında artıyor.
+Final fiyat başlangıç fiyatının 3–4 katı olacak.
+Şimdi satın alın — tüm gelecek güncellemeleri ücretsiz alın.
+
+═══════════════════════════════════════════════════════
+
+                    MERCARIA UNICORN
+         Adaptive Grid Trading System
+              XAUUSD · MetaTrader 5
+
+  Çok yıllık piyasa deneyimine sahip uygulamacı
+        trader'lar tarafından geliştirildi
+              her seviyeye uygun
+
+═══════════════════════════════════════════════════════
+
+
+Mercaria Unicorn "sıradan bir grid değil", Altın (XAUUSD) ve diğer CFD enstrümanları için adaptif bir ticaret sistemidir. Sabit parametreli standart grid robotlarının aksine, danışman seviye sayısını, lot büyüklüğünü ve risk eşiklerini otomatik olarak seçilen volatilite profiline ve hesap bakiyenize göre ayarlar.
+
+Tüm kritik kararlar grafik üzerindeki görsel kontrol paneline taşınmıştır — anlık ayar değişiklikleri için F7 yeniden başlatması gerekmez. "Çalıştır ve unut" tarzı için, haber takvimi ile riski yöneten deneyimli trader'lar için ve kendi giriş stratejisi üzerine akıllı pozisyon yöneticisi isteyen profesyoneller için uygundur.
+
+
+═══════════════════════════════════════════════════════
+   ÖNE ÇIKAN ÖZELLİKLER
+═══════════════════════════════════════════════════════
+
+▸ 4 VOLATİLİTE PROFİLİ
+  NORMAL, SPIKE_M, SPIKE_L, BLACK SWAN. Sakin gün, haber günü (CPI/FOMC), NFP sürprizi ve kriz durumları için. Panelden tek tıkla geçiş, yeniden başlatma gerekmez.
+
+▸ ADAPTİF AUTOSIZING
+  Danışman, bakiyeniz için güvenli seviye sayısını ve lot büyüklüğünü kendisi hesaplar. Tahmin yok, yalnızca güvenlik tamponuna sahip matematiksel model.
+
+▸ LOT SCALING
+  Tüm USD eşikleri (TP, SL, trail, kar koruması) aktif lotla otomatik ölçeklenir. Aynı yapılandırma 300 $ ve 30.000 $ hesaplarda elle yeniden hesaplama gerektirmeden çalışır.
+
+▸ İKİ KATMANLI KAR KORUMASI
+  Önce yüzdeli koruma devreye girer (zirveden düşüş), ardından USD trail. Karın "sıfıra geri dönmesini" engeller.
+
+▸ PROFIT-TO-SL BONUS
+  Opsiyonel mekanizma: kapatılan karın bir kısmı havuzun SL "yastığına" eklenir. Kazancı sigortaya yeniden yatırma, depoziti riske etmeden.
+
+▸ GÖRSEL KONTROL PANELİ
+  6 bölüm (Live, Sizing, Grid, Risk, Stats, Log). Buton tabanlı kontrol, yanlış tıklama koruması (LOCK), sadece-okuma modu (READ ONLY), acil kapama (PANIC).
+
+▸ ÇOK KATMANLI HESAP KORUMASI
+  USD cinsinden sert havuz SL, oturum SL-hit limiti, oturum hedefi sonrası otomatik durdurma, Margin Call mesafesi göstergesi.
+
+▸ TAM GERÇEK ZAMANLI İSTATİSTİKLER
+  Win rate, Avg pool PnL, bakiye ile kuruş kuruşuna uyumlu Closed PnL, Streak, Max drawdown, Pools today.
+
+
+═══════════════════════════════════════════════════════
+   KİMLERE UYGUN
+═══════════════════════════════════════════════════════
+
+▸ BAŞLAYAN TRADER'LAR
+  Hazır "çalıştır ve unut" ön ayarları. AutoSizing CAP modu + SPIKE_M temel profili + günlük hedefte otomatik durdurma. Danışman riski bakiyenize göre sınırlar. Siz sadece günlük kar hedefini belirler ve paneli izlersiniz.
+
+▸ 1–2 YIL DENEYİMLİ TRADER'LAR
+  Yarı otomatik mod. Ekonomik takvimi takip eder, önemli haberlerden önce tek tıkla volatilite profilini değiştirirsiniz. Sabah NORMAL, FOMC öncesi SPIKE_M, NFP gününde SPIKE_L. Danışman seçilen model için güvenli sizing'i anında yeniden hesaplar.
+
+▸ PROFESYONEL TRADER'LAR
+  Mercaria Unicorn pozisyon yöneticisi olarak kullanılır. İşlemleri kendi stratejinizle (price action, teknik analiz, news trading) açar, danışman her pozisyonu otomatik yönetir: tersine hareketlerde seviye ekler, karı trail ile korur, disiplinli kurallarla kapatır. Piyasanın kızgın anlarında duygusal karar yok.
+
+
+═══════════════════════════════════════════════════════
+   PARAMETRE GRUPLARI (F7)
+═══════════════════════════════════════════════════════
+
+Tüm ayarlar mantıksal olarak 11 grupta organize edilmiş. Çoğu kullanıcı yalnızca ilk ikisine dokunur.
+
+▸ Main — Magic, LotSize, GridStepPoints, MaxGridLevels, TakeProfitUSD, MaxDrawdownUSD, MinPauseBetweenOrders. Temel grid mekaniği ve risk limitleri.
+
+▸ AutoSizing — Mode (OFF / ADVISORY / CAP / FULL), Scenario, SafetyBuffer, MinLevels, MaxLevels, MaxLot, RescaleDown. Bakiye ve senaryoya göre dinamik N×lot hesaplama.
+
+▸ Risk Scenarios — 4 profil için point cinsinden δ-overrun, kalibrasyon katsayısı, senaryo başına lot limitleri. Adaptif modelin belirli bir broker'a ince ayarı.
+
+▸ Pyramid & Recovery — UsePyramidTrail, PyramidTrailStart, PyramidTrailStep. Floating kar zirvesinde USD trail.
+
+▸ Profit Protection — UseProfitProtect, ProfitProtectMinUSD, ProfitProtectDropPct. Zirveden düşüşte yüzdeli kar koruması.
+
+▸ Profit-to-SL Bonus — UseProfitToSLBonus, ProfitToSLPercent, ProfitToSLCapUSD. Kapatılan kardan opsiyonel SL yastığı.
+
+▸ Lot Scaling — UseLotScaling, BaseLotReference, GridTPGrowthPercent, VirtualBalanceUSD. TP/SL/trail'in geçerli lota adaptasyonu.
+
+▸ Candle Filter — mum yönüne göre filtre.
+
+▸ Entries per candle — tek bir mum içinde giriş limiti. Aşırı ticarete karşı koruma.
+
+▸ Session — TargetProfitUSD (günlük hedef), MaxLossCount (oturum SL limiti). Herhangi birine ulaşıldığında danışman otomatik durur.
+
+▸ Visual — panel yazı tipi boyutu ve fontu.
+
+Her parametrenin örnekler ve önerilen değerlerle tam açıklaması online kullanıcı kılavuzunda (link aşağıda).
+
+
+═══════════════════════════════════════════════════════
+   KONTROL PANELİ
+═══════════════════════════════════════════════════════
+
+Danışmanın ana kontrol penceresi grafik üzerinde görsel paneldir. Sabit kontrol başlığı + 6 katlanabilir bölüm.
+
+▸ HEADER
+  Durum, Float / Equity, hedef ilerleme çubuklu Session PnL, butonlar ON / OFF / BUY / SELL / PANIC / X CLOSE / RESET, LOCK / MOVE / READ ON-OFF, Margin Call göstergesi. Panel arka planı drawdown artışına göre renk değiştirir (5 seviye).
+
+▸ LIVE
+  Geçerli H1 mumu, mum başına giriş sayacı, spread (geçerli / ortalama / max), açık pozisyonlardaki komisyon.
+
+▸ SIZING
+  Balance / Leverage, anlık geçiş için 4 Mode butonu × 4 Scenario butonu, aktif sizing (N × lot × çarpan), seçili senaryonun δ değeri, tam grid için gereken margin, worst-case tahmini, 4 senaryo için gereken depozite önerileri.
+
+▸ GRID
+  Aktif grid yönü, açık seviyeler (X / max), ortalama giriş fiyatı, havuz PnL, toplam hacim, sonraki seviye fiyatı ve mesafesi.
+
+▸ RISK
+  USD ve bakiyenin %'si olarak kullanılan margin, serbest margin, margin level, Margin Call'a point ve USD olarak mesafe, geçerli SL buffer (Profit-to-SL Bonus aktifse).
+
+▸ STATS
+  Closed PnL (bakiye ile kuruş kuruşuna uyumlu), Pools closed (kar/zarar ayrımı), SL hits, Max drawdown, çubuklu Trail peak, Pools today, Streak, Win rate, Avg pool, son havuzlardaki maksimum hareket.
+
+▸ LOG
+  Son 8 danışman olayının kayan jurnali (TP, SL, trail, kar koruması, manuel işlemler).
+
+
+═══════════════════════════════════════════════════════
+   KULLANIM SENARYOLARI
+═══════════════════════════════════════════════════════
+
+▸ TAM OTOMATİK
+  Grafiği izlemeye vakti olmayanlar için.
+  Ayar: Mode = CAP, Scenario = SPIKE_M, TargetProfit = depozitin %2–3'ü.
+
+▸ HABER TAKVİMİ
+  1–2 yıl deneyim, sabah brifingi.
+  Ayar: Mode = FULL, sabah NORMAL, haber öncesi SPIKE_M veya SPIKE_L.
+
+▸ MANUEL + AUTO-YÖNETİM
+  Kendi giriş stratejisi olan profiler için.
+  Ayar: Mode = OFF, AUTO OFF butonu, sinyalle manuel BUY/SELL.
+
+▸ DEMO / KAYIT
+  Mentor, ortak, video içerik için.
+  Ayar: READ ON'a bir tık — panel sadece-okuma modunda.
+
+
+═══════════════════════════════════════════════════════
+   MİNİMUM GEREKSİNİMLER
+═══════════════════════════════════════════════════════
+
+  Platform:           MetaTrader 5
+  Enstrüman:          XAUUSD (Altın) — optimal
+  Hesap tipi:         Hedging (önerilir) veya Netting
+  Grafik zaman dilimi: herhangi (mantık grafik TF'ye bağlı değil)
+  Minimum depozit:    300 $ (NORMAL, 0,01 lot) · optimal 1.000 $'dan
+  Kaldıraç:           1:100 ve üzeri
+  Bağlantı:           VPS önerilir ama zorunlu değil
+
+
+EN İYİ SONUÇLAR İÇİN ÖNERİLENLER:
+
+✓ 1.000 $'dan depozit — tüm 4 profil ve FULL AutoSizing modu için alan sağlar
+✓ ECN / Raw spread hesabı — düşük spread (1–5 pt), sık TP çıkışları için kritik
+✓ Düşük altın komisyonu (lot başına round-turn 5 $'ı geçmesin)
+✓ Hızlı yürütmeli broker (sık re-quote olmadan)
+✓ Reale geçmeden önce demo hesapta en az 1–2 işlem oturumu test
+
+
+═══════════════════════════════════════════════════════
+   ÖNERİLEN DEĞERLENDİRME PLANI
+═══════════════════════════════════════════════════════
+
+Danışmanı kendi koşullarınızda doğru değerlendirmek için:
+
+1. Ürünü MQL5 Market'tan satın alın. Satın aldıktan sonra terminalinizde otomatik görünür.
+
+2. Demo hesap oluşturun broker'ınızda 10.000 $ bakiyeyle. Hesap tipi tercihen Hedging (cent veya standard mekanik testi için fark etmez).
+
+3. Farklı kaldıraçlarda sırayla test edin: 1:100, 1:500, 1:1000, 1:2000, 1:3000. Bu, farklı broker margin gereksinimlerinde mevcut grid seviyelerinin ve AutoSizing davranışının nasıl değiştiğine dair tam bir resim verir.
+
+4. En az 1–2 tam işlem oturumu gerçek piyasa koşullarında çalıştırın. Strategy Tester'da değil — oradaki sonuçlar eksiktir (bkz. aşağı).
+
+5. Metriklerinizi takip edin: Win rate, Avg pool, Max drawdown, Pools today. Hepsi STATS panel bölümünde gerçek zamanlı görünür.
+
+6. Detaylı online kullanıcı kılavuzunu açın — davranışı doğru yorumlamaya ve kendi stiliniz için parametreleri seçmeye yardımcı olur.
+
+7. Sadece başarılı demo sonrası gerçek hesaba geçin. Minimum lotla (0,01) başlayın, istatistik biriktikçe kademeli artırın.
+
+
+═══════════════════════════════════════════════════════
+   STRATEGY TESTER HAKKINDA ÖNEMLİ
+═══════════════════════════════════════════════════════
+
+Standart MetaTrader 5 Strategy Tester'da test, danışmanın çalışma şeklinin eksik bir resmini verir. Çünkü:
+
+✗ %75'in üzerindeki hızlarda tester tick atlamaya başlar, bu hassas fiyat hareketlerine duyarlı grid mantığı için kritiktir.
+✗ Tester gerçek slippage'ı ve haberler sırasındaki anlık spread değişimlerini hesaba katmaz.
+✗ Tester içindeki sanal işlem, broker'ın gerçek yürütme ortamından farklı davranabilir.
+
+Strategy Tester'da test edecekseniz — zorunlu ayarlar:
+✓ Yalnızca görsel mod (Visual Mode = ON)
+✓ Hız %75'ten fazla olmamalı
+✓ Modelleme kalitesi: Every tick based on real ticks
+
+EN İYİ DEĞERLENDİRME YÖNTEMİ — gerçek kotasyon akışıyla demo hesap testi. Bu gerçek işlem süresinde en güvenilir sonucu verir.
+
+
+═══════════════════════════════════════════════════════
+   PAKETTE NELER VAR
+═══════════════════════════════════════════════════════
+
+✓ Derlenmiş danışman Mercaria Unicorn v3.572 — Navigator → Market'tan tek tıkla kurulur
+✓ Yazarın sayfasında tam online kullanıcı kılavuzu — tüm parametrelerin, panel bölümlerinin, senaryoların, FAQ'in detaylı açıklaması
+✓ Video eğitimi — panel kullanımı ve danışman yapılandırması üzerine (yazarın kanalında)
+✓ Tüm gelecek güncellemeler — MQL5 Market üzerinden otomatik, sonsuza dek ücretsiz
+✓ Kişisel yazar desteği — ayar sorularına MQL5 mesajları üzerinden yanıt veriyorum, genellikle 24 saat içinde
+✓ 5 aktivasyon — MQL5 Market standardına göre, farklı bilgisayarlar ve VPS için
+
+
+═══════════════════════════════════════════════════════
+   DETAYLI KILAVUZ VE VİDEO
+═══════════════════════════════════════════════════════
+
+Tam kullanıcı belgeleri, parametre analizi, her senaryo için checklist'ler — yazarın kişisel sayfasında:
+
+➜  https://www.mql5.com/en/users/empty.seeing/news
+
+Aynı yerde video eğitimleri, güncelleme tanıtımları ve kullanıcılardan gelen tipik sorulara yanıtlar bulunur. Yeni materyallerden haberdar olmak için abone olun.
+
+
+═══════════════════════════════════════════════════════
+   HIZLI BAŞLANGIÇ
+═══════════════════════════════════════════════════════
+
+1. Ürünü MQL5 Market'tan satın alın — terminalinizde Navigator → Market'ta otomatik görünür.
+2. XAUUSD grafiği açın (herhangi bir zaman dilimi).
+3. Danışmanı grafiğe sürükleyin. Ayarlar penceresinde varsayılanları bırakın veya MaxDrawdownUSD'yi depozitinize göre ayarlayın (genellikle bakiyenin %5–7'si).
+4. Terminalde AutoTrading'i etkinleştirin (MetaTrader 5 üst araç çubuğu).
+5. Grafikteki danışmanın görsel panelini izleyin. Tüm kontrol butonlarla, F7 yok.
+
+
+═══════════════════════════════════════════════════════
+   TEKNİK DETAYLAR
+═══════════════════════════════════════════════════════
+
+  Sürüm:            3.572
+  Tür:              Expert Advisor (EA) MetaTrader 5 için
+  Strateji profili: Dinamik risk yönetimli adaptif grid stratejisi
+  Hedef enstrüman:  XAUUSD (diğer CFD'lere uygulanabilir)
+  Magic numarası:   kullanıcı yapılandırabilir (varsayılan 885533)
+  Arayüz dili:      panel ve parametreler — İngilizce
+  Güncelleme:       MQL5 Market üzerinden otomatik
+
+
+═══════════════════════════════════════════════════════
+   ⚠️  ÖNEMLİ RİSK BİLGİLENDİRMESİ
+═══════════════════════════════════════════════════════
+
+Mercaria Unicorn bir ticaret otomasyon aracıdır. GEÇMİŞ SONUÇLAR GELECEKTEKİ GETİRİLERİ GARANTİ ETMEZ. Grid ticaret stratejileri uzun süreli tek yönlü piyasa hareketlerinde önemli floating drawdown riski taşır. Trader, risk profili, depozit büyüklüğü, kaldıraç seçimi ve koruma modlarının (Lock, MaxDrawdownUSD, MaxLossCount, Profit Protection) uygulamasından tamamen sorumludur. GERÇEK HESAPTA İŞLEMDEN ÖNCE demo hesapta en az 1–2 işlem oturumu test zorunludur. Kaybı sizin için kritik olacak fonlar asla kullanmayın.
+
+
+═══════════════════════════════════════════════════════
+
+         Şimdi başlangıç fiyatından satın alın
+       Fiyat her 10 kopya satışında artıyor
+          Tüm güncellemeler — sonsuza dek ücretsiz
+
+  Mercaria Unicorn · Adaptive Grid Trading System · MT5
+   Çok yıllık piyasa deneyimine sahip uygulamacı trader'lar tarafından geliştirildi

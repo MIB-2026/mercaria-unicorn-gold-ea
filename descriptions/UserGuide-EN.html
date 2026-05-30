@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mercaria Unicorn EA v3.572 — User Guide</title>
+<style>
+:root{
+  --bg:#0c0f15; --panel:#161a24; --panel2:#1c2230; --line:#2a3142;
+  --txt:#e0e5ee; --dim:#8892a2;
+  --gold:#e0b94a; --green:#5ec27a; --red:#d36a6a; --blue:#5aa4ff; --orange:#e69a3c; --purple:#a98ce8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;padding:32px;max-width:1100px;margin:auto}
+
+/* HERO */
+.hero{text-align:center;padding:32px 0 36px;border-bottom:1px solid var(--line);margin-bottom:32px}
+.hero h1{color:var(--gold);font-size:38px;letter-spacing:2px;margin:0 0 8px}
+.hero .tag{color:var(--dim);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.hero .ver{display:inline-block;margin-top:14px;background:var(--panel);padding:5px 14px;border-radius:4px;border:1px solid var(--line);color:var(--blue);font-size:12px;letter-spacing:1px}
+
+/* HEADINGS */
+h2{color:var(--blue);margin-top:42px;font-size:22px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{color:var(--gold);margin-top:26px;font-size:17px}
+h4{color:var(--orange);margin-top:18px;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+
+/* TOC */
+.toc{background:var(--panel);padding:14px 22px;border-radius:6px;margin-bottom:24px;border-left:3px solid var(--blue)}
+.toc strong{color:var(--gold);display:block;margin-bottom:6px;font-size:12px;letter-spacing:1px}
+.toc a{color:var(--blue);text-decoration:none;margin-right:14px;font-size:13px}
+.toc a:hover{text-decoration:underline}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0}
+.card{background:var(--panel);padding:14px 18px;border-radius:6px;border-left:3px solid var(--blue)}
+.card.green{border-color:var(--green)}
+.card.gold{border-color:var(--gold)}
+.card.red{border-color:var(--red)}
+.card.orange{border-color:var(--orange)}
+.card.purple{border-color:var(--purple)}
+.card h4{margin:0 0 6px;color:var(--gold);font-size:14px;text-transform:none;letter-spacing:0}
+.card p{margin:4px 0;color:var(--dim);font-size:13px}
+
+/* TABLES */
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--gold)}
+td.param{color:var(--blue);font-family:Consolas,monospace;font-size:12px;white-space:nowrap}
+td.def{color:var(--orange);font-family:Consolas,monospace;font-size:12px;text-align:center}
+td.dim{color:var(--dim)}
+
+/* CODE / BOXES */
+code{background:var(--panel2);color:#c5d0e0;padding:1px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:12px}
+.tip{background:#1d2a22;border-left:3px solid var(--green);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+.warn{background:#2a1d1d;border-left:3px solid var(--red);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+.info{background:#1c2330;border-left:3px solid var(--blue);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:13px}
+
+/* PANEL DIAGRAM (text-based) */
+.panel-mock{background:#0a0c12;border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin:14px 0;font-family:Consolas,monospace;font-size:11.5px;line-height:1.45;color:#c5d0e0;white-space:pre;overflow-x:auto}
+.panel-mock .ttl{color:var(--gold);font-weight:600}
+.panel-mock .gn{color:var(--green)}
+.panel-mock .rd{color:var(--red)}
+.panel-mock .bl{color:var(--blue)}
+.panel-mock .or{color:var(--orange)}
+.panel-mock .pu{color:var(--purple)}
+.panel-mock .dm{color:var(--dim)}
+.panel-mock .hdr-sec{color:var(--gold);border-top:1px solid var(--line);padding-top:4px;margin-top:6px;display:block}
+
+/* PILLS */
+.pill{display:inline-block;background:var(--panel2);color:var(--txt);padding:2px 9px;border-radius:10px;font-size:11px;margin-right:4px;border:1px solid var(--line)}
+.pill.gn{color:var(--green);border-color:var(--green)}
+.pill.rd{color:var(--red);border-color:var(--red)}
+.pill.or{color:var(--orange);border-color:var(--orange)}
+.pill.bl{color:var(--blue);border-color:var(--blue)}
+.pill.gd{color:var(--gold);border-color:var(--gold)}
+
+/* KPI ROW */
+.kpi{display:flex;gap:16px;justify-content:center;margin:22px 0;flex-wrap:wrap}
+.kpi .k{background:var(--panel);padding:14px 22px;border-radius:6px;text-align:center;min-width:150px;border-top:2px solid var(--gold)}
+.kpi .k .v{color:var(--gold);font-size:24px;font-weight:600;display:block}
+.kpi .k .l{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+/* DISCLAIMER */
+.disclaimer{background:#2a1d1d;border-left:3px solid var(--red);padding:16px 20px;margin:30px 0 10px;border-radius:4px;font-size:12.5px;color:#c5b0b0}
+.disclaimer b{color:var(--red)}
+
+/* HELPER */
+.muted{color:var(--dim);font-size:12px}
+ol li, ul li{margin:4px 0}
+hr{border:none;border-top:1px solid var(--line);margin:36px 0}
+</style>
+</head>
+<body>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  HERO                                              -->
+<!-- ────────────────────────────────────────────────── -->
+<div class="hero">
+  <h1>MERCARIA UNICORN</h1>
+  <div class="tag">Adaptive Grid Trading System  ·  XAUUSD-Optimized  ·  MetaTrader 5</div>
+  <div class="ver">v3.572  ·  User Guide</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <strong>Table of Contents</strong>
+  <a href="#about">About the EA</a>
+  <a href="#quickstart">Quick Start</a>
+  <a href="#panel">Control Panel</a>
+  <a href="#params">Parameters</a>
+  <a href="#scenarios">Usage Scenarios</a>
+  <a href="#tips">Tips &amp; Tricks</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  1. ABOUT THE EA                                    -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="about">1. About the Expert Advisor</h2>
+
+<p>Mercaria Unicorn is an adaptive grid trading robot for MetaTrader 5, developed specifically for Gold (XAUUSD), but applicable to any CFD instrument by adjusting the grid step. The main difference from typical "fixed-parameter grids" is that the EA <b>automatically adjusts the number of levels and lot size to match your deposit and chosen market model</b>, rather than trading "blindly" based on a single pre-configured situation.</p>
+
+<div class="kpi">
+  <div class="k"><span class="v">4</span><span class="l">market profiles</span></div>
+  <div class="k"><span class="v">4</span><span class="l">sizing modes</span></div>
+  <div class="k"><span class="v">6</span><span class="l">panel sections</span></div>
+  <div class="k"><span class="v">2-click</span><span class="l">on-the-fly switch</span></div>
+</div>
+
+<h3>Who is it for?</h3>
+<div class="grid">
+  <div class="card green">
+    <h4>Beginner Traders with 1–2 Years of Experience</h4>
+    <p>If you understand margin, leverage, and spread but don't want to manually set up every trade. Mercaria Unicorn offers a ready-made system: 4 pre-configured volatility profiles, automatic lot and grid level selection tailored to your deposit. Connect to the market without having to micro-manage every trade.</p>
+  </div>
+  <div class="card gold">
+    <h4>Professional Traders with a Ready Strategy</h4>
+    <p>Experienced traders use Mercaria Unicorn as a <b>position manager</b>: you find the entry (price action, news, or your own system) and the EA takes care of all the operational work: grid building, recovery, two-layer profit protection, margin control, and pool SL. Parameters can be finely tuned to match your risk tolerance. The adaptive <b>Lot Scaling</b> feature allows you to work seamlessly on $1k, $10k, and $100k accounts without manually recalculating thresholds.</p>
+  </div>
+  <div class="card blue">
+    <h4>Those Who Want Full Control Over Calculations</h4>
+    <p>All key parameters are displayed on the panel and in the F7 settings. Transparent margin formulas, worst-case forecasts, and recommendations for all 4 scenarios simultaneously. No "magic black box" — you see exactly what is happening and why.</p>
+  </div>
+  <div class="card purple">
+    <h4>Those Who Want to Combine Manual and Auto Trading</h4>
+    <p>The <code>BUY</code>/<code>SELL</code> buttons on the panel open a manual position, which the EA then manages automatically. <b>PANIC</b> and <b>X CLOSE</b> provide emergency and confirmed manual exits. <b>READ ONLY</b> mode prevents any accidental clicks during demonstrations.</p>
+  </div>
+</div>
+
+<h3>Main Advantages</h3>
+<table>
+<tr><th style="width:30%">Feature</th><th>Why is it useful?</th></tr>
+<tr><td><b>4 Volatility Profiles</b> (NORMAL / SPIKE_M / SPIKE_L / BLACK SWAN)</td><td>The EA maintains different risk settings for calm days, news days (CPI/FOMC), NFP surprises, and crisis situations. Switch profiles with a single click from the panel.</td></tr>
+<tr><td><b>Adaptive Sizing Engine</b></td><td>The EA calculates the safest number of grid levels and lot size based on your deposit. No need to manually test combinations — everything is calculated mathematically with a safety buffer.</td></tr>
+<tr><td><b>Lot Scaling — TP/SL adjusted to lot size</b> <span class="pill gd">v3.572</span></td><td>When the lot size changes (manually or via AutoSizing), the TP, SL, trailing, and profit protection thresholds automatically scale to match the new volume. The same risk profile works on any deposit without manual recalculations.</td></tr>
+<tr><td><b>Two-Layer Profit Protection</b></td><td>First, percentage protection is triggered (if profit drops by N% from its peak), followed by a standard USD trailing stop. This locks in accumulated profits instead of letting them slide back to zero.</td></tr>
+<tr><td><b>Profit-to-SL Bonus</b> <span class="pill gd">v3.572</span></td><td>Optional: a portion of closed profit (e.g. 50%) is automatically added to the pool's allowed drawdown as a "cushion". The more you earn in a session, the larger the buffer for handling the next market move. The cushion is reset on an SL hit. Perfect for aggressive scaling.</td></tr>
+<tr><td><b>Account Protection</b></td><td>Hard pool SL in USD + limit on the number of SL hits per session + auto-stop upon reaching the session profit target — all configurable separately.</td></tr>
+<tr><td><b>LOCK Mode</b></td><td>A single click protects against accidental button clicks during high-volatility moments. Auto-management and risk exits continue to function.</td></tr>
+<tr><td><b>PANIC CLOSE</b></td><td>An emergency close button for all positions <i>without confirmation</i> — for times when you need to exit "right now".</td></tr>
+<tr><td><b>READ ONLY Mode</b></td><td>If you are sharing your screen, terminal, or recording a video, switch the panel to read-only mode to disable all interactive elements.</td></tr>
+</table>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  2. QUICK START                                    -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="quickstart">2. Quick Start in 4 Steps</h2>
+
+<div class="info">
+  <b>Before the first launch:</b> test the EA on a demo account for at least 1–2 trading sessions. Grid strategies are highly sensitive to broker conditions (spread, commission, swap), and the same settings can yield different results on different accounts.
+</div>
+
+<h3>Step 1. Installation from MQL5 Market</h3>
+<ol>
+  <li>After purchasing on <code>www.mql5.com/en/market</code>, the EA <b>automatically becomes available</b> in your MT5 terminal — no need to download and copy files manually. Make sure you are logged into your terminal with the same MQL5 account used for the purchase.</li>
+  <li>In MetaTrader 5, open the <b>Navigator</b> panel (Ctrl+N), expand the <b>Market</b> section, and you will see <code>Mercaria Unicorn</code> in the list of purchased products.</li>
+  <li>If the EA is not listed: go to <b>Toolbox → Market tab → Purchases</b>, select <code>Mercaria Unicorn</code>, and click <b>Install</b>. If the terminal asks to activate, follow the prompts (each MQL5 Market purchase provides 5 activations).</li>
+  <li>Open the chart of the instrument you want to trade (<b>XAUUSD</b> is recommended, any timeframe — the logic does not depend on the chart's TF).</li>
+  <li>Drag the EA from Navigator → Market onto the chart. The settings window (F7) will open.</li>
+</ol>
+<div class="info">
+<b>Demo Account:</b> A Market purchase works on MT5 demo accounts using the same activations. Test the EA on a demo account for 1–2 sessions before going live.
+</div>
+
+<h3>Step 2. Initial Configuration</h3>
+<p>When you drag the EA onto the chart, the settings window (F7) will open. For your first run, we recommend leaving <b>most parameters at their default values</b> and adjusting only these key inputs:</p>
+
+<table>
+<tr><th style="width:25%">Parameter</th><th style="width:18%">What to do</th><th>Why</th></tr>
+<tr><td class="param">InputMagic</td><td>Leave as-is (885533) or enter your own</td><td>Only change this if you run multiple copies of the EA on the same account — each copy needs a unique Magic number.</td></tr>
+<tr><td class="param">LotSize</td><td>0.01 (minimum)</td><td>Starting lot size for the initial position. Keep this at the minimum on demo to observe the system's behavior.</td></tr>
+<tr><td class="param">MaxDrawdownUSD</td><td>~5–10% of deposit</td><td>This is the hard SL for the entire grid in USD. For a $1000 account, set this to 50–100. This is a hard exit — the pool will close even if it could have eventually recovered.</td></tr>
+<tr><td class="param">AutoSizing_Mode</td><td>ADVISORY (recommended)</td><td>In this mode, the EA <i>displays</i> recommendations on the panel but does not modify your actual settings. Ideal for getting started.</td></tr>
+<tr><td class="param">AutoSizing_Scenario</td><td>SPIKE_M</td><td>Starting market volatility profile. SPIKE_M is a good "middle ground" setting for typical news days.</td></tr>
+</table>
+
+<h3>Step 3. Enable Auto Trading</h3>
+<ol>
+  <li>At the top of the terminal, click the <b>Algo Trading</b> button (turn it green).</li>
+  <li>A green "play" icon should appear next to the EA name in the top right corner of the chart.</li>
+</ol>
+
+<h3>Step 4. Monitor the Panel</h3>
+<p>The control panel will appear on the chart (see §3). For the first few minutes, nothing may happen as the EA <b>waits for an entry signal</b>. During this time, the header will show the <span class="pill gn">READY</span> status.</p>
+
+<div class="tip">
+<b>When the EA opens the first trade:</b> the status will change to <span class="pill bl">ACTIVE +1</span> (in profit) or <span class="pill rd">ACTIVE -1 (DD)</span> (in drawdown), and the <b>GRID</b> section will show active grid parameters.
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  3. CONTROL PANEL                                  -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="panel">3. The Control Panel</h2>
+
+<p>All interactions with the EA are handled through the on-chart panel. No need to reload settings (F7) to change parameters on the fly — everything is clickable. The panel consists of a <b>fixed header</b> and <b>6 collapsible sections</b>.</p>
+
+<h3>Panel Structure (Text Layout)</h3>
+
+<div class="panel-mock">
+<span class="ttl">MERCARIA UNICORN          XAUUSD          12:34:56</span>
+
+<span class="gn">┌────────────────────────────────────┐</span>      H1 in
+<span class="gn">│         ACTIVE  +3                 │</span>      03:24
+<span class="gn">└────────────────────────────────────┘</span>
+
+Float:  <span class="gn">+12.40</span>             Equity: 1015.40
+Session: <span class="gn">+47.20</span> / 200 USD (24%)
+█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  target progress
+
+<span class="gn">[ON]</span> [OFF]  <span class="bl">[BUY]</span> <span class="rd">[SELL]</span>  <span class="rd">[PANIC]</span> <span class="rd">[X CLOSE]</span> <span class="or">[RESET]</span>
+
+[LOCK]  [READ OFF]  [MOVE]   Margin Call: ████████░ 87%
+
+<span class="hdr-sec">▼ LIVE</span>
+  Candle:     2026.05.18 12:00
+  Entries:    <span class="gn">2/120</span>
+  Spread:     12.5 pt (avg 14.0, max 35)
+  Commission: 0.42 USD (0.140/lot)
+
+<span class="hdr-sec">▼ SIZING</span>
+  Balance: 1104.10 USD                 Leverage: 1:500
+  Mode:    [OFF]  <span class="bl">[ADVISORY]</span>  [CAP]  [FULL]
+  Scen:    [NORMAL] <span class="gn">[SPIKE_M]</span> [SPIKE_L] [BLK_SWAN]
+  Active:  30 × 0.01 lot               Scenario:  SPIKE_M (3.0k pt)
+  Full margin: 268.80 USD              Worst case: -945.00 USD
+  ── Recommended setups (N × lot) ──
+  Normal:    <span class="gn">29 × 0.01   (need $1079)</span>
+  Spike M:   <span class="gn">24 × 0.01   (need $1087)</span>
+  Spike L:   <span class="or">19 × 0.01   (need $1083)</span>
+  Blk Swan:  <span class="rd">14 × 0.01   (need $1063)</span>
+
+<span class="hdr-sec">▶ GRID</span>          <span class="dm">(collapsed — click to expand)</span>
+<span class="hdr-sec">▶ RISK</span>
+<span class="hdr-sec">▶ STATS</span>
+<span class="hdr-sec">▶ LOG</span>
+</div>
+
+<!-- HEADER -->
+<h3>3.1. Panel Header (Always Visible)</h3>
+
+<table>
+<tr><th style="width:30%">Element</th><th>Description / Action</th></tr>
+<tr><td><b>Title row</b></td><td><span class="pill gd">MERCARIA UNICORN</span> · trading symbol · current server time.</td></tr>
+<tr><td><b>Status badge</b><br><span class="muted">central colored status badge</span></td><td>
+  <span class="pill gn">READY</span> — no active positions, EA is waiting for a signal.<br>
+  <span class="pill bl">ACTIVE  +N</span> — N levels open, price is moving in our favor.<br>
+  <span class="pill rd">ACTIVE  -N (DD)</span> — N levels open, price is moving against us (drawdown).<br>
+  <span class="pill or">COOLDOWN Ns</span> — pool has just closed, EA is resting for N seconds.<br>
+  <span class="pill" style="color:#90a070;border-color:#90a070">AUTO OFF</span> — auto trading is disabled (no new entries will be taken).<br>
+  <span class="pill or">WAIT (entry limit)</span> — entry limit for the current candle has been reached.
+</td></tr>
+<tr><td><b>H1 in</b></td><td>Time remaining until the current H1 candle closes. Useful when using the H1 candle filter.</td></tr>
+<tr><td><b>Float</b></td><td>Floating PnL for all active positions of this EA. Green = positive, Red = negative.</td></tr>
+<tr><td><b>Equity</b></td><td>Current account equity.</td></tr>
+<tr><td><b>Session</b></td><td>Closed profit since EA launch + current float, formatted as <code>earned / target (percentage)</code>. The progress bar below visualizes progress toward the session goal.</td></tr>
+<tr><td><b>Margin Call bar</b></td><td>Free margin level progress bar in %. <span class="pill gn">>60%</span> green, <span class="pill or">30–60%</span> yellow, <span class="pill rd">&lt;30%</span> red — critical level, margin call risk from broker.</td></tr>
+<tr><td><b>Background</b></td><td>The panel background darkens to red as drawdown increases. 5 distinct levels provide a peripheral visual cue ("all ok / alert / red zone").</td></tr>
+</table>
+
+<h4>Header Buttons</h4>
+
+<table>
+<tr><th style="width:25%">Button</th><th>Action</th></tr>
+<tr><td><span class="pill gn">ON</span></td><td>Enable auto trading. The EA will start scanning for entry signals.</td></tr>
+<tr><td><span class="pill" style="color:#aa3030;border-color:#aa3030">OFF</span></td><td>Disable auto trading. The active grid will still be managed until it closes via TP/SL/trail, but no new grids will start.</td></tr>
+<tr><td><span class="pill bl">BUY</span></td><td>Open a manual BUY position using the current active lot size. The EA will immediately take over its management (recovery grid, profit protection).</td></tr>
+<tr><td><span class="pill rd">SELL</span></td><td>Same as BUY, but for a short position.</td></tr>
+<tr><td><span class="pill rd">PANIC</span></td><td><b>Emergency close</b> for all positions <i>without confirmation</i>. Use when you need an immediate exit. Handle with care.</td></tr>
+<tr><td><span class="pill rd">X CLOSE</span></td><td>Close all positions <b>with confirmation</b> (double click): first click shows "CONFIRM?", second click executes. Safer than PANIC.</td></tr>
+<tr><td><span class="pill or">RESET</span></td><td>Reset internal EA counters (full state reset). Requires a double click. Use if state variables get out of sync.</td></tr>
+<tr><td><span class="pill" style="color:#aa6060;border-color:#aa6060">LOCK</span></td><td>Locks all action buttons to prevent accidental clicks. Auto-management and risk exits <b>remain active</b>.</td></tr>
+<tr><td><span class="pill" style="color:#aa6060;border-color:#aa6060">READ ON/OFF</span></td><td>Read-only mode. Completely blocks all clicks (including Lock/Drag). Useful for screenshots, video recording, or demos.</td></tr>
+<tr><td><span class="pill" style="color:#7080a0;border-color:#7080a0">MOVE</span></td><td>Enable panel dragging. Once active, drag the panel to your desired position. Coordinates are saved across chart reloads.</td></tr>
+</table>
+
+<!-- SECTIONS -->
+<h3>3.2. Collapsible Sections</h3>
+
+<p>Click on any section header (the <code>▼/▶</code> arrow) to expand or collapse it. This allows you to keep only relevant information visible on your chart.</p>
+
+<div class="grid">
+
+  <div class="card">
+    <h4>▼ LIVE — Monitoring</h4>
+    <p><b>Candle</b> — current H1 candle time.<br>
+       <b>Entries</b> — entry counter for the current candle (over-trading protection).<br>
+       <b>Spread</b> — current / average / maximum spread in points.<br>
+       <b>Commission</b> — commissions paid for active positions (total and per-lot average).</p>
+  </div>
+
+  <div class="card gold">
+    <h4>▼ SIZING — Adaptive Sizing</h4>
+    <p><b>Balance / Leverage</b> — account parameters.<br>
+       <b>4 Mode buttons</b> — sizing engine mode (OFF / ADV / CAP / FULL).<br>
+       <b>4 Scen buttons</b> — volatility profile (NORMAL / SPIKE_M / SPIKE_L / BLK_SWAN).<br>
+       <b>Active</b> — actual grid parameters (Levels × Lot) used by the EA.<br>
+       <b>Full margin</b> — margin required to hold the complete grid.<br>
+       <b>Worst case</b> — projected drawdown in USD for the worst-case scenario.<br>
+       <b>Recommended setups</b> — matrix of recommended setups for each of the 4 profiles, showing minimum deposit requirements.</p>
+  </div>
+
+  <div class="card gold">
+    <h4>▼ GRID — Active Grid State</h4>
+    <p><b>Direction</b> — buy/sell.<br>
+       <b>Levels</b> — open / maximum levels (e.g. <code>3/30</code>).<br>
+       <b>Avg Entry</b> — average entry price of the grid.<br>
+       <b>Grid PnL</b> — current pool PnL in USD.<br>
+       <b>Volume</b> — total volume of the grid.<br>
+       <b>Next level</b> — price of the next grid level and distance to it.</p>
+  </div>
+
+  <div class="card red">
+    <h4>▼ RISK — Margin &amp; Drawdown</h4>
+    <p><b>Setup margin</b> — margin used by the active setup in USD and % of balance.<br>
+       <b>Free margin</b> — free margin.<br>
+       <b>Margin level</b> — margin level % (critical if <200).<br>
+       <b>Distance to MC</b> — distance in points to margin call and USD equivalent. Color: green = safe, orange = warning, red = critical.<br>
+       <b>SL buffer</b> — accumulated "cushion" from the Profit-to-SL Bonus. Shows how much the effective pool SL has been expanded.</p>
+  </div>
+
+  <div class="card green">
+    <h4>▼ STATS — Statistics &amp; Performance</h4>
+    <p><b>Closed PnL</b> — closed profit since the start of the session.<br>
+       <b>Pools closed</b> — number of pools closed in profit / loss.<br>
+       <b>SL hits</b> — SL hit counter and session limit.<br>
+       <b>Max drawdown</b> — maximum drawdown recorded (USD and %).<br>
+       <b>Trail peak</b> + bar — current peak profit and distance to the trailing activation start.<br>
+       <b>Pools today</b> — number of pools closed today.<br>
+       <b>Streak</b> — consecutive winning/losing streak.<br>
+       <b>Win rate</b> — % of profitable pools.<br>
+       <b>Avg pool</b> — average PnL per pool.<br>
+       <b>Max move</b> — maximum market move in points over recent pools.</p>
+  </div>
+
+  <div class="card purple">
+    <h4>▼ LOG — Event Log</h4>
+    <p>A rolling buffer of the last 8 EA events: entries, closures by TP/SL/trail/protection, and manual actions. Allows quick review of what happened without checking the MT5 Experts tab.</p>
+  </div>
+
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  4. PARAMETERS                                     -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="params">4. Parameters in the Settings Window (F7)</h2>
+
+<p>Below is a description of all configurable parameters, grouped by logical categories.</p>
+
+<!-- Основные -->
+<h3>4.1. Core Settings</h3>
+<p>Basic grid parameters and risk limits. These are the main settings you may want to adjust.</p>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">InputMagic</td><td class="def">885533</td><td>Unique identifier for the EA on the account. Change this if running multiple instances on the same account to prevent them from interfering with each other's positions.</td></tr>
+<tr><td class="param">LotSize</td><td class="def">0.01</td><td>Lot size for the initial position. For small deposits ($300–$1000), leave this at the minimum 0.01.</td></tr>
+<tr><td class="param">GridStepPoints</td><td class="def">150</td><td>Distance between grid levels in points. Smaller values lead to more frequent entries (higher density, requires more margin). Larger values mean fewer entries but wider spacing. <b>For XAUUSD, 100–200 points is the standard range.</b></td></tr>
+<tr><td class="param">MaxGridLevels</td><td class="def">30</td><td>Maximum number of levels allowed in a single grid. Once reached, the EA stops adding levels and waits for the grid to close. For a $1000 account with 150 points step, 30 levels is a reasonable limit.</td></tr>
+<tr><td class="param">TakeProfitUSD</td><td class="def">4.0</td><td>Profit target for the pool in USD. When the total grid PnL reaches this value, the pool closes. Smaller values result in faster and more frequent TP exits.</td></tr>
+<tr><td class="param">MaxDrawdownUSD</td><td class="def">900.0</td><td><b>The most critical risk parameter.</b> The hard SL for the pool in USD. If floating loss reaches this value, the entire grid closes immediately. <b>Set this to 5–10% of your deposit.</b></td></tr>
+<tr><td class="param">MinPauseBetweenOrders</td><td class="def">10</td><td>Minimum time interval (in seconds) between opening adjacent grid levels. Prevents order spamming during rapid market movements.</td></tr>
+</table>
+
+<!-- AutoSizing -->
+<h3>4.2. AutoSizing Engine</h3>
+<p>This group controls how the EA <b>automatically</b> adjusts the grid depth and lot size to fit your deposit. This is a core feature of Mercaria Unicorn.</p>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">AutoSizing_Mode</td><td class="def">ADVISORY</td><td>
+  <b>OFF</b> — the EA uses your MaxGridLevels and LotSize as-is.<br>
+  <b>ADVISORY</b> — your settings are active, but the panel <i>displays recommendations</i> for each profile. <span class="pill gd">Recommended for starting out</span><br>
+  <b>CAP</b> — caps MaxGridLevels to a safe limit calculated for the chosen profile; lot size remains yours.<br>
+  <b>FULL</b> — fully manages grid levels and lot size based on calculations; manual inputs are ignored.</td></tr>
+<tr><td class="param">AutoSizing_Scenario</td><td class="def">SPIKE_M</td><td>Starting volatility profile. See §4.3.</td></tr>
+<tr><td class="param">AutoSizing_SafetyBuffer</td><td class="def">1.2</td><td>Multiplier for the required deposit calculation. 1.2 adds a 20% safety margin above the theoretical minimum. Do not set below 1.1.</td></tr>
+<tr><td class="param">AutoSizing_MinLevels</td><td class="def">5</td><td>Lower limit for the calculated grid depth to prevent grids that are too shallow.</td></tr>
+<tr><td class="param">AutoSizing_MaxLevels</td><td class="def">50</td><td>Upper limit for the calculated grid depth to prevent overly deep grids.</td></tr>
+<tr><td class="param">AutoSizing_LotStep</td><td class="def">0.01</td><td>Incremental step size used when searching for the optimal lot size.</td></tr>
+<tr><td class="param">AutoSizing_MaxLot</td><td class="def">1.00</td><td>Hard lot cap that the EA will not exceed even in FULL mode.</td></tr>
+<tr><td class="param">AutoSizing_RescaleDown</td><td class="def">true</td><td>Allows the EA to <i>decrease</i> grid levels and lot size after a pool closes if the balance has dropped. true = dynamic resizing, false = only scale up.</td></tr>
+</table>
+
+<!-- Risk Scenarios -->
+<h3>4.3. Volatility Profiles (Risk Scenarios)</h3>
+<p>Each profile calibrates the "maximum expected adverse market move" used by the sizing engine to calculate risk. You can switch between these profiles at any time via the panel.</p>
+
+<table>
+<tr><th style="width:18%">Profile</th><th style="width:14%">Default Value</th><th>Recommended Use</th></tr>
+<tr><td><span class="pill gn">NORMAL</span></td><td class="def">1500 pt</td><td>Calm trading days, standard M1 volatility, no major news.</td></tr>
+<tr><td><span class="pill or">SPIKE_M</span></td><td class="def">3000 pt</td><td>CPI, FOMC, or ECB release days. High-impact news with a scheduled time.</td></tr>
+<tr><td><span class="pill rd">SPIKE_L</span></td><td class="def">5000 pt</td><td>NFP surprises, FOMC minutes, unexpected economic reports.</td></tr>
+<tr><td><span class="pill" style="color:#8b3030;border-color:#8b3030">BLACK SWAN</span></td><td class="def">8000 pt</td><td>Major geopolitical events, banking crises, or extreme commodity shocks. Maximum risk limit.</td></tr>
+</table>
+
+<h4>Group Parameters</h4>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">Scen_Normal_pt<br>Scen_SpikeM_pt<br>Scen_SpikeL_pt<br>Scen_BlackSwan_pt</td><td class="def">1500<br>3000<br>5000<br>8000</td><td>Distance calibration for each profile. If actual price swings on your broker/symbol are consistently larger, increase these values.</td></tr>
+<tr><td class="param">Scen_PyramidK</td><td class="def">0.6</td><td>Calibration coefficient for the risk model. Adjust only if you notice a systematic discrepancy between calculations and actual drawdown in STATS.</td></tr>
+<tr><td class="param">Scen_Normal_MaxLot<br>Scen_SpikeM_MaxLot<br>Scen_SpikeL_MaxLot<br>Scen_BSW_MaxLot</td><td class="def">0.0 (=global)</td><td>Lot caps per scenario. If set to 0, the global <code>AutoSizing_MaxLot</code> is used. This allows you to set higher caps on NORMAL and very tight limits on BLACK SWAN.</td></tr>
+</table>
+
+<div class="tip">
+<b>Choosing a profile:</b> Review the economic calendar before your session. If a CPI or FOMC release is scheduled, switch to <b>SPIKE_M</b>. For NFP releases, use <b>SPIKE_L</b>. For crises, use <b>BLACK SWAN</b>. On regular trading days, keep it on <b>NORMAL</b>.
+</div>
+
+<!-- Pyramid Trail -->
+<h3>4.4. Pyramid &amp; Recovery — Profit Management</h3>
+<p>Controls the USD trailing stop based on floating profit peak.</p>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">UsePyramidTrail</td><td class="def">true</td><td>Enable profit trailing. If disabled, the pool closes strictly at TakeProfitUSD, MaxDrawdownUSD, or via Profit Protection.</td></tr>
+<tr><td class="param">PyramidTrailStart</td><td class="def">4.75</td><td>The profit threshold in USD at which trailing is activated. Smaller values trigger trailing earlier but may reduce the average profit per pool.</td></tr>
+<tr><td class="param">PyramidTrailStep</td><td class="def">2.45</td><td>The allowed pullback distance in USD from the peak profit before closing the grid. Smaller values make trailing more sensitive.</td></tr>
+</table>
+
+<!-- Profit Protection -->
+<h3>4.5. Profit Protection</h3>
+<p>An additional layer of profit protection. It triggers <b>earlier</b> than the Pyramid Trail once the peak profit reaches a minimum threshold. This is a key safety feature.</p>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">UseProfitProtect</td><td class="def">true</td><td>Enable percentage-based profit protection.</td></tr>
+<tr><td class="param">ProfitProtectMinUSD</td><td class="def">5.0</td><td>Minimum peak profit in USD required to activate protection. Prior to this, the protection remains inactive. <i>Scales automatically with lot size (see §4.6).</i></td></tr>
+<tr><td class="param">ProfitProtectDropPct</td><td class="def">30.0</td><td>Close the pool if current profit drops by this percentage from its peak. Default is 30%: if peak was +10 USD, the grid closes if profit drops to +7 USD.</td></tr>
+</table>
+
+<div class="info">
+<b>Example:</b> The EA opens a grid and profit reaches +12 USD (peak). With <code>ProfitProtectDropPct = 30</code>, the allowed pullback is 30% of 12 = 3.6 USD. Once profit drops to +8.4 USD, the pool closes, securing +8.4 USD. Without this protection, the trade could have retraced back into a drawdown.
+</div>
+
+<!-- Profit-to-SL Bonus -->
+<h3>4.6. Profit-to-SL Bonus — Cushion from Closed Profit <span class="pill gd">v3.572</span></h3>
+<p>An optional feature: a percentage of each <b>profitable closed pool</b> is added to the pool's allowed drawdown as a "cushion". The more you earn in a session, the larger the buffer for handling the next market move. The cushion is reset on an SL hit. This is useful for aggressive scaling, as it leverages accumulated profit rather than risking the initial capital.</p>
+
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">UseProfitToSLBonus</td><td class="def">false</td><td>Enable the bonus cushion. Disabled by default as a standard static SL is easier to manage for most users.</td></tr>
+<tr><td class="param">ProfitToSLPercent</td><td class="def">50.0</td><td>Percentage of closed profit allocated to the SL cushion. E.g., 50% of a $10 profit pool adds $5 to the cushion.</td></tr>
+<tr><td class="param">ProfitToSLCapUSD</td><td class="def">0.0</td><td>Maximum limit for the accumulated cushion in USD. <b>0</b> = unlimited. If set to 200, the cushion will not expand the SL by more than $200.</td></tr>
+</table>
+
+<div class="info">
+<b>Example:</b> Base <code>MaxDrawdownUSD=100</code>, <code>UseProfitToSLBonus=true</code>, <code>ProfitToSLPercent=50</code>:
+<ol style="margin:6px 0 0 18px">
+  <li>Pool #1 closes with +$10 → cushion = +$5. Effective SL = −$105.</li>
+  <li>Pool #2 closes with +$8 → cushion = +$9. Effective SL = −$109.</li>
+  <li>Pool #3 closes with +$12 → cushion = +$15. Effective SL = −$115.</li>
+  <li>Pool #4 hits SL at $115 → cushion is reset to 0. Effective SL returns to −$100.</li>
+</ol>
+In the panel → RISK section → the <b>SL buffer</b> line shows the current cushion and effective SL.<br>
+<span class="muted">Recommended for experienced traders who want to "reinvest" a portion of profits into risk protection.</span>
+</div>
+
+<!-- Lot Scaling -->
+<h3>4.7. Lot Scaling — Parameter Adaptation <span class="pill gd">v3.572</span></h3>
+<p>When the EA trades with a lot size different from the reference lot (<code>BaseLotReference</code>), all USD-based thresholds (TP, SL, trailing, profit protection) are scaled proportionally. This ensures that the risk profile remains consistent regardless of position size.</p>
+
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">UseLotScaling</td><td class="def">true</td><td>Enable TP/SL/trail/protection scaling to match the active lot size. If set to <b>false</b>, all thresholds act as absolute USD values (legacy mode).</td></tr>
+<tr><td class="param">BaseLotReference</td><td class="def">0.01</td><td>Reference lot size. If active lot = reference lot, multiplier is 1.0 (defaults apply). If active lot is 5 times larger, all USD thresholds are multiplied by 5.</td></tr>
+<tr><td class="param">GridTPGrowthPercent</td><td class="def">3.0</td><td>Percentage growth of the pool target TP with each new grid level. Compensates for increased volume as the grid expands. <b>0</b> = TP remains static (modified only by lot scaling).</td></tr>
+<tr><td class="param">VirtualBalanceUSD</td><td class="def">0.0</td><td>Virtual balance for AutoSizing. If <b>&gt; 0</b>, the sizing engine calculates parameters using this value instead of the actual account balance. Useful for syncing settings across different accounts or for backtesting. <b>0</b> = use actual account balance.</td></tr>
+</table>
+
+<div class="info">
+<b>Scaling Example:</b> Base settings: <code>LotSize=0.01</code>, <code>TakeProfitUSD=4</code>, <code>MaxDrawdownUSD=900</code>, <code>BaseLotReference=0.01</code>.<br>
+With lot scaling active, the thresholds adjust automatically:
+<table>
+<tr><th>Active Lot</th><th>Multiplier</th><th>TP (1st Level)</th><th>TP (10th Level, +3% × 9)</th><th>Pool SL</th></tr>
+<tr><td>0.01</td><td>×1.0</td><td>$4.00</td><td>$5.22</td><td>$900</td></tr>
+<tr><td>0.02</td><td>×2.0</td><td>$8.00</td><td>$10.44</td><td>$1800</td></tr>
+<tr><td>0.05</td><td>×5.0</td><td>$20.00</td><td>$26.10</td><td>$4500</td></tr>
+<tr><td>0.10</td><td>×10.0</td><td>$40.00</td><td>$52.20</td><td>$9000</td></tr>
+</table>
+<span class="muted"><b>Note:</b> <code>TargetProfitUSD</code> (session profit target) is NOT scaled — it remains an absolute session limit set by the user.</span>
+</div>
+
+<!-- Candle Filter -->
+<h3>4.8. Candle Filter</h3>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">CandleDirectionFilter</td><td class="def">false</td><td>If true, the EA only enters in the direction of the current H1 candle. It will not open a short position during a bullish H1 candle and vice versa.</td></tr>
+</table>
+
+<!-- Entries -->
+<h3>4.9. Entries per Candle</h3>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">MaxEntriesPerCandle</td><td class="def">120</td><td>Maximum number of trade entries within a single H1 candle. Prevents over-trading during sharp, volatile price runs.</td></tr>
+</table>
+
+<!-- Session -->
+<h3>4.10. Session Limits &amp; Targets</h3>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">TargetProfitUSD</td><td class="def">200.0</td><td>Session profit target. Once reached, the EA <b>automatically disables auto trading</b> (AUTO OFF). Active grids are managed until closed, but no new grids will start.</td></tr>
+<tr><td class="param">MaxLossCount</td><td class="def">10</td><td>Maximum number of pool SL hits allowed per session. Once reached, the EA disables auto trading (AUTO OFF).</td></tr>
+</table>
+
+<!-- Visual -->
+<h3>4.11. Visual Panel Settings</h3>
+<table>
+<tr><th style="width:22%">Parameter</th><th style="width:14%">Default Value</th><th>Description</th></tr>
+<tr><td class="param">PanelFontSize</td><td class="def">9</td><td>Font size used for text on the control panel.</td></tr>
+<tr><td class="param">PanelFont</td><td class="def">Segoe UI</td><td>Font family used for the panel text. Supports any standard system font.</td></tr>
+</table>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  4.12 BALANCES / LEVERAGE / ACCOUNT TYPES         -->
+<!-- ────────────────────────────────────────────────── -->
+<h3>4.12. Balance, Leverage, and Account Types — Key Considerations</h3>
+
+<p>Depending on your broker and account type, identical EA parameters can result in <b>different</b> margin requirements and limitations. Three main factors play a key role: account balance, leverage, and account type (Standard / ECN / Cent / Hedging / Netting). They directly determine how many grid levels can fit within your margin and what lot size is safe.</p>
+
+<h4>Impact of Leverage on Margin Requirements</h4>
+<p>Margin required to hold 0.01 lot of XAUUSD ≈ <code>Price × ContractSize × Lots / Leverage</code>. For gold <code>ContractSize = 100</code>, so at a price of $4500 with a 0.01 lot: <code>4500 × 100 × 0.01 / Leverage = 4500 / Leverage</code> (e.g. $9 per level at 1:500). Higher leverage reduces the margin occupied by each grid level, allowing more levels to fit within your account deposit.</p>
+<table>
+<tr><th>Leverage</th><th>Margin for 0.01 lot XAUUSD @ $4500</th><th>Max Levels with $1,000 Deposit</th><th>Max Levels with $5,000 Deposit</th></tr>
+<tr><td>1:30 (EU regul.)</td><td>$150.00</td><td>~6</td><td>~33</td></tr>
+<tr><td>1:50 (US regul.)</td><td>$90.00</td><td>~11</td><td>~55</td></tr>
+<tr><td>1:100</td><td>$45.00</td><td>~22</td><td>~110</td></tr>
+<tr><td>1:200</td><td>$22.50</td><td>~44</td><td>~200+</td></tr>
+<tr><td>1:500</td><td>$9.00</td><td>~110</td><td>~200+ (capped by <code>MaxLevels</code>)</td></tr>
+<tr><td>1:1000</td><td>$4.50</td><td>~200+</td><td>~200+ (capped by <code>MaxLevels</code>)</td></tr>
+<tr><td>1:2000</td><td>$2.25</td><td>~200+</td><td>~200+ (capped by <code>MaxLevels</code>)</td></tr>
+</table>
+<p class="muted">Level counts represent the theoretical margin ceiling (deposit ÷ margin per level). Actual grid depth is further limited by <code>AutoSizing_MaxLevels</code> (default 50) and the ≤30–40% margin rule (see below). Specific numbers vary based on gold price, broker margin specifications, and account base currency. The <b>SIZING</b> section of the panel always displays the actual margin required for a full grid based on your current settings.</p>
+
+<h4>Account Type Details</h4>
+<table>
+<tr><th>Account Type</th><th>Key Features</th><th>Impact on the EA</th></tr>
+<tr><td><b>Standard</b></td><td>Spread built into the quote, no separate commission</td><td>Perfectly compatible. Include the average spread (usually 20–35 points on gold) in your scenario delta calibration.</td></tr>
+<tr><td><b>ECN / Raw</b></td><td>Tight spreads (1–5 points) + separate commission (~$3–7 per lot round-turn)</td><td>Highly efficient for frequent TP exits. The <b>LIVE → Commission</b> line shows commissions paid for active positions. You may need to slightly increase <code>TakeProfitUSD</code> to cover commission costs.</td></tr>
+<tr><td><b>Cent</b></td><td>1 lot = 1,000 contract units instead of 100,000 (XAUUSD: 1 cent lot ≈ 0.001 standard lot)</td><td>On cent accounts, <code>LotSize=0.01</code> represents a micro-volume. Useful for testing strategies at minimal cost. <b>Lot Scaling</b> facilitates transition to standard accounts later.</td></tr>
+<tr><td><b>Hedging</b></td><td>Allows holding buy and sell positions simultaneously</td><td>Fully supported. You can run <b>two instances</b> of the EA with different Magic numbers — one configured for buy-only, the other for sell-only.</td></tr>
+<tr><td><b>Netting</b></td><td>One consolidated position per instrument</td><td>Supported, but less flexible: manual BUY while holding an active SELL grid will close out part of the position. Keep this in mind when manually intervening.</td></tr>
+</table>
+
+<h4>Selecting LotSize Based on Deposit + Leverage</h4>
+<p>A general rule of thumb: <b>total margin occupied by a full grid should not exceed 30–40% of your deposit</b>. This leaves 60–70% of free margin to absorb drawdown (worst-case float).</p>
+<table>
+<tr><th>Deposit</th><th>1:30 Leverage</th><th>1:100 Leverage</th><th>1:500 Leverage</th><th>Recommended Setup</th></tr>
+<tr><td>$300–500</td><td>0.01 (10 lvl)</td><td>0.01 (30 lvl)</td><td>0.01 (50 lvl)</td><td>NORMAL / SPIKE_M, CAP Mode</td></tr>
+<tr><td>$1,000</td><td>0.01 (15 lvl)</td><td>0.01 (50 lvl)</td><td>0.02 (50 lvl)</td><td>SPIKE_M, ADVISORY or CAP Mode</td></tr>
+<tr><td>$5,000</td><td>0.02 (30 lvl)</td><td>0.03 (60 lvl)</td><td>0.05 (80 lvl)</td><td>SPIKE_M / SPIKE_L, FULL Mode</td></tr>
+<tr><td>$10,000+</td><td>0.05</td><td>0.10</td><td>0.20+</td><td>Any scenario, FULL Mode, can use <code>VirtualBalanceUSD</code> for stability</td></tr>
+</table>
+
+<div class="info">
+<b>Lot Scaling across different deposits:</b> The primary advantage of v3.572 is that the same configuration file works on both $1k and $100k accounts. If you test your settings with a 0.01 lot size and a $4 TP on a small account, switching to a $100k account with a 0.5 lot size will automatically scale the TP to $200 and the pool SL to $45,000 (a 50x increase matching the reference lot multiplier). No manual recalculations needed.
+</div>
+
+<div class="warn">
+<b>Margin Call Risk:</b> Accounts with 1:30 leverage (EU regulated) and a strict 50% Stop-Out represent the tightest trading conditions for grid strategies. On such accounts, use the <b>SPIKE_L</b> or <b>BLACK SWAN</b> scenarios by default and set <code>MaxDrawdownUSD</code> to 3–5% of the deposit. Keep a close eye on the Margin Call bar in the header: if it drops into the red zone (&lt;30%), consider manually closing a portion of the grid.
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  5. SCENARIOS                                      -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="scenarios">5. Usage Scenarios</h2>
+
+<p>Mercaria Unicorn is a flexible tool. It can be run fully automated, semi-automated with manual profile switching, or purely as a manual position manager with automatic trailing. Below are three workflow setups with concrete numbers for typical deposits.</p>
+
+<!-- ─── A. ПОЛНАЯ АВТОМАТИЗАЦИЯ ─── -->
+<h3>5.1. Fully Automated Setup — For Hands-Off Trading</h3>
+<p><b>Best for:</b> Traders who want a "set-and-forget" robot. This is the starting scenario for most users.</p>
+
+<h4>Configuration</h4>
+<ol>
+  <li><code>AutoSizing_Mode</code> = <b>CAP</b> — the EA automatically restricts the grid levels to a safe depth. The initial lot size is determined by your <code>LotSize</code> input.</li>
+  <li><code>AutoSizing_Scenario</code> = <b>SPIKE_M</b> — a versatile profile that accounts for typical news events throughout the day.</li>
+  <li><code>MaxDrawdownUSD</code> = 5–7% of deposit (see table below).</li>
+  <li><code>UseProfitProtect</code> = <b>true</b>, <code>ProfitProtectDropPct</code> = <b>25</b> (aggressive profit locking).</li>
+  <li><code>TargetProfitUSD</code> = 2–3% of deposit (the EA automatically stops trading once this target is reached).</li>
+  <li><code>UseLotScaling</code> = <b>true</b> — all thresholds scale with the active lot size.</li>
+</ol>
+
+<h4>Setup Parameters for Typical Deposits</h4>
+<table>
+<tr><th>Deposit</th><th>LotSize</th><th>MaxDrawdownUSD</th><th>TakeProfitUSD</th><th>TargetProfitUSD</th><th>Setup Margin<br>(Approx.)</th><th>Daily Target</th></tr>
+<tr><td>$300</td><td>0.01</td><td>$20</td><td>$2.0</td><td>$6–9</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$500</td><td>0.01</td><td>$35</td><td>$3.0</td><td>$10–15</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$1,000</td><td>0.01</td><td>$60</td><td>$4.0</td><td>$20–30</td><td>$100–140</td><td>2–3%</td></tr>
+<tr><td>$3,000</td><td>0.02</td><td>$200</td><td>$6.0</td><td>$60–90</td><td>$200–280</td><td>2–3%</td></tr>
+<tr><td>$10,000</td><td>0.05</td><td>$700</td><td>$15.0</td><td>$200–300</td><td>$500–700</td><td>2–3%</td></tr>
+</table>
+<p class="muted">Setup Margin is calculated for XAUUSD with 1:100 leverage. Check your broker's specifications. Pool profits are scaled automatically using Lot Scaling.</p>
+
+<div class="tip">
+<b>Realistic Daily Expectations:</b> The EA typically closes 5–20 pools per day depending on volatility. With average exits via trail/protection yielding ~1.2x of the base TakeProfit, the expected daily gross PnL is approximately <code>Pools × TakeProfit × 1.2</code>. For a $1000 account closing 10 pools: 10 × $4 × 1.2 ≈ <b>$48 (≈ 4.8%)</b>. Since this exceeds the <code>TargetProfitUSD</code> target of $20–30, the EA will hit its daily goal and stop trading automatically in the middle of the day.
+</div>
+
+<!-- ─── B. ЧАСТИЧНАЯ ─── -->
+<h3>5.2. Semi-Automated Setup — Volatility Profiling via News Calendar</h3>
+<p><b>Best for:</b> Intermediate traders who track news events (via economic calendars like investing.com) and understand the impact of CPI, FOMC, and NFP releases.</p>
+
+<h4>Methodology</h4>
+<p>Evaluate the economic calendar before each trading session and select an appropriate volatility profile (NORMAL / SPIKE_M / SPIKE_L / BLACK SWAN). Switch the profile via the panel with a single click, and the EA will immediately adjust its sizing calculations.</p>
+
+<h4>Daily Workflow</h4>
+<ol>
+  <li><b>Preparation (7:00–9:00 GMT):</b> Check the news calendar:
+    <ul>
+      <li>Empty calendar / minor events → start on <b>NORMAL</b>.</li>
+      <li>CPI / FOMC / ECB release scheduled → start on <b>NORMAL</b>, switch to <b>SPIKE_M</b> 30–60 minutes before the release.</li>
+      <li>NFP or major unscheduled central bank announcements → start on <b>SPIKE_L</b>.</li>
+      <li>Geopolitical crisis / market shock → use <b>BLACK SWAN</b>.</li>
+    </ul>
+  </li>
+  <li><code>AutoSizing_Mode</code> = <b>FULL</b> — the EA fully manages the N×lot configuration.</li>
+  <li>Once the news event has passed (typically 1–2 hours post-release) and the market settles, return the profile to <b>NORMAL</b> to resume more active trading.</li>
+  <li>Set the daily session target (<code>TargetProfitUSD</code>) to 3–5% of the deposit. Once reached, the EA halts trading until the next day.</li>
+</ol>
+
+<h4>Example: $1000 Deposit on FOMC Day</h4>
+<table>
+<tr><th>Time</th><th>Event</th><th>Profile</th><th>EA Action</th></tr>
+<tr><td>08:00</td><td>Quiet morning session</td><td><span class="pill gn">NORMAL</span></td><td>50 × 0.01 lot, TP ≈ $4, SL ≈ $60</td></tr>
+<tr><td>13:00</td><td>One hour before FOMC</td><td><span class="pill or">SPIKE_M</span></td><td>Profile switch → 35 × 0.01 lot (deeper spacing, fewer levels)</td></tr>
+<tr><td>14:00</td><td>FOMC Release</td><td><span class="pill or">SPIKE_M</span></td><td>Price spike is absorbed safely, recovery grid triggers and closes in profit</td></tr>
+<tr><td>16:00</td><td>Market consolidates</td><td><span class="pill gn">NORMAL</span></td><td>Switch back to active profile to complete the daily plan</td></tr>
+<tr><td>~18:00</td><td>Daily target achieved</td><td>—</td><td>$30 closed profit (3%) reached → AUTO OFF triggers</td></tr>
+</table>
+
+<div class="info">
+<b>Why this is effective:</b> Grid systems typically fail when caught unprepared in high-volatility news events. Mercaria Unicorn solves this by allowing you to preemptively adjust the volatility profile, widening grid spacing and decreasing levels to absorb the spike safely without triggering a hard pool SL.
+</div>
+
+<!-- ─── C. РУЧНОЕ УПРАВЛЕНИЕ ─── -->
+<h3>5.3. Manual Entry Setup — For Professional Position Management</h3>
+<p><b>Best for:</b> Experienced traders who have their own entry signals (price action, key support/resistance levels, order flow) and want to use the EA strictly for automated trade management and recovery.</p>
+
+<h4>Methodology</h4>
+<p>You identify the setup and execute the trade. The EA:</p>
+<ul>
+  <li>Does not open initial trades automatically (set to OFF).</li>
+  <li>Once you click BUY or SELL on the panel, it immediately takes over management:
+    <ul>
+      <li>If the trade moves against you, it adds grid recovery levels.</li>
+      <li>If the trade moves in your favor, it trails the profit and applies percentage-based protection.</li>
+      <li>Closes the entire pool automatically at TP, SL, or trailing exit.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Configuration</h4>
+<ol>
+  <li>Click the <b>OFF</b> button on the panel to disable automatic entry signals.</li>
+  <li>Set <code>AutoSizing_Mode</code> = <b>OFF</b> so the EA does not alter your custom parameters.</li>
+  <li>Configure <code>LotSize</code>, <code>MaxDrawdownUSD</code>, <code>PyramidTrailStart/Step</code>, and <code>ProfitProtectMinUSD/DropPct</code> to fit your manual system.</li>
+  <li>When your entry signal triggers, click <b>BUY</b> or <b>SELL</b> on the panel to open the initial position.</li>
+  <li>The EA will manage the position to completion. You can exit manually at any time using <b>X CLOSE</b> (requires confirmation) or <b>PANIC</b> (instant execution).</li>
+</ol>
+
+<h4>Example: Support/Resistance Trader with a $5000 Deposit</h4>
+<table>
+<tr><th>Time</th><th>Action</th><th>Grid State</th><th>Floating PnL</th></tr>
+<tr><td>10:15</td><td>Price tests support at 4520, entry signal → click <b>BUY</b></td><td>1 × 0.03 lot @ 4520</td><td>$0</td></tr>
+<tr><td>10:30</td><td>Price retraces to 4515, EA opens recovery level #2</td><td>2 × 0.03 lot, avg entry 4517.5</td><td>−$15</td></tr>
+<tr><td>11:00</td><td>Price rebounds to 4525, profit reaches peak at +$15</td><td>2 × 0.03 lot, avg entry 4517.5</td><td>+$15</td></tr>
+<tr><td>11:15</td><td>Profit pullbacks to +$10.5 (30% drop from peak) → Profit Protect triggers</td><td>Grid closed</td><td>+$10.5 ✓</td></tr>
+</table>
+
+<div class="info">
+<b>Note:</b> Lot Scaling remains active for manual trades. If you open a 0.03 lot position with a reference lot of 0.01, the EA automatically scales your parameters: TP = $12 (3x), SL = $180 (3x). No need to manually adjust settings for different trade sizes.
+</div>
+
+<!-- ─── ДЕМО ─── -->
+<h3>5.4. Demonstrations &amp; Video Recording</h3>
+<p>If you are sharing your screen, recording a tutorial, or presenting the terminal to clients, use the read-only mode to prevent accidental interactions:</p>
+<ol>
+  <li>Click the <b>👁 READ OFF</b> button (it will turn red and display "👁 READ ON").</li>
+  <li>All buttons on the panel are now locked, preventing accidental adjustments.</li>
+  <li>Click the button again to return to active control.</li>
+</ol>
+<p>Alternatively, use the <b>🔒 LOCK</b> button to lock only action buttons (BUY/SELL/CLOSE/RESET) while keeping auto-trading and section collapsing active.</p>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  6. TIPS                                           -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="tips">6. Tips &amp; Tricks</h2>
+
+<div class="grid">
+  <div class="card green">
+    <h4>Run 2 Demo Sessions Before Live Trading</h4>
+    <p>Spend one session on NORMAL and another on SPIKE_M during news events. Record average pool duration, win rate, and drawdown in the STATS section to establish your baseline.</p>
+  </div>
+  <div class="card gold">
+    <h4>Use SIZING as a Risk Calculator</h4>
+    <p>In <code>ADVISORY</code> mode, the "Recommended setups" table displays deposit requirements for each profile, allowing you to quickly assess risk compatibility.</p>
+  </div>
+  <div class="card blue">
+    <h4>Monitor the Margin Call Bar</h4>
+    <p>If the bar turns orange or red, your active sizing is too aggressive for the current market movement. Consider lowering your lot size or switching to a safer profile (SPIKE_L / BSW).</p>
+  </div>
+  <div class="card orange">
+    <h4>Check "Recent max move" in STATS</h4>
+    <p>This metric shows the largest price swings recorded during recent grid cycles. If this value approaches the limits of your active profile, switch to a wider profile.</p>
+  </div>
+  <div class="card red">
+    <h4>Use LOCK Mode during distractions</h4>
+    <p>If you need to leave your desk or attend a call, lock the panel. Grids and risk protection will continue running, but accidental clicks are blocked.</p>
+  </div>
+  <div class="card purple">
+    <h4>Unique Magic Numbers</h4>
+    <p>If running multiple copies of the EA on the same account, assign a unique <code>InputMagic</code> to each copy to prevent them from reading each other's trades.</p>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  7. FAQ                                            -->
+<!-- ────────────────────────────────────────────────── -->
+<h2 id="faq">7. FAQ</h2>
+
+<h3>What is the minimum required deposit?</h3>
+<p>The absolute minimum is <b>$300</b> using a <code>LotSize=0.01</code> on the <b>NORMAL</b> profile. A comfortable minimum for standard brokers is <b>$500–$1,000</b>. The exact requirements for each profile are displayed in the <b>SIZING</b> → "Recommended setups" panel section. See the table in §5.1 for sample configurations across various account balances.</p>
+
+<h3>What is new in v3.572?</h3>
+<ul>
+  <li><b>Profit-to-SL Bonus</b> (§4.6) — optional drawdown cushion funded by closed profits.</li>
+  <li><b>Lot Scaling</b> (§4.7) — TP, SL, trailing, and protection thresholds scale dynamically with lot size.</li>
+  <li><b>VirtualBalanceUSD</b> — fixed virtual balance for AutoSizing calculations.</li>
+  <li><b>Session auto-restart</b> — clicking ON after reaching a session target automatically starts a new session.</li>
+  <li><b>Technical improvements</b> — improved Session PnL accuracy and stability on EA restart/removal; refined input-parameter interface.</li>
+</ul>
+
+<h3>Which instruments can be traded?</h3>
+<p>The EA is optimized for XAUUSD. It can be applied to other CFDs by adjusting <code>GridStepPoints</code> to match the volatility of the asset. We do not recommend trading cryptocurrencies without thorough backtesting due to extreme baseline volatility.</p>
+
+<h3>What timeframe should I use?</h3>
+<p>Any timeframe. The EA's logic operates independently of the chart timeframe. M5 or M15 are recommended for convenient visual monitoring.</p>
+
+<h3>What does the RESET button do?</h3>
+<p>Resets the current trading session: clears Closed PnL, Pools closed, Win rate, Streak, Max drawdown, and sets the current account balance as the new session baseline. **It does not close active trades** (use X CLOSE or PANIC). Use this to start a fresh trading session (e.g. at the start of a trading day or after hitting a daily goal).</p>
+
+<h3>What happens if I click ON after reaching the session profit target?</h3>
+<p>The EA detects that the session concluded via <code>TargetProfitUSD</code> (or the <code>MaxLossCount</code> limit). Clicking ON <b>initiates a new session</b>: it resets session statistics and activates the profit target goal again.</p>
+
+<h3>Can I switch sizing modes or profiles while a grid is active?</h3>
+<p>Yes. The active grid will be managed using the parameters it was opened with. Changes will apply to the **next** grid pool. Switching settings on the fly is completely safe.</p>
+
+<h3>What does "AUTO OFF" mean?</h3>
+<p>Auto trading is disabled. Active positions will still be managed to completion (TP/SL/trail/protection), but no new grid cycles will be initiated. This allows for a graceful exit from the market.</p>
+
+<h3>What is the difference between PANIC and X CLOSE?</h3>
+<p><b>PANIC</b> closes all trades instantly with a single click. <b>X CLOSE</b> requires a double click (shows a "CONFIRM?" confirmation step). PANIC is faster but carries a risk of accidental trigger.</p>
+
+<h3>What is Lot Scaling and how does it work?</h3>
+<p>When the EA trades with a lot size different from the reference lot (<code>BaseLotReference</code>, default 0.01), all USD-based thresholds (TP, SL, trailing, profit protection) are multiplied by the ratio: <code>active_lot / BaseLotReference</code>. This ensures that the risk profile scales proportionally with your account balance. <b>TargetProfitUSD</b> is excluded from scaling and remains absolute.</p>
+
+<h3>What is VirtualBalanceUSD?</h3>
+<p>A simulated balance input for AutoSizing. If set to 0, the real account balance is used. If set to a specific value (e.g., 1000), the sizing calculations simulate a $1,000 account. This is useful for copying settings across different accounts or running conservative tests. When active, "(virt)" appears next to the balance in the SIZING section.</p>
+
+<h3>Are my control panel preferences saved?</h3>
+<p>Yes. Panel coordinates, LOCK / READ ONLY states, and collapsed section choices are stored in MT5 Global Variables and persist across restarts.</p>
+
+<h3>What does "cooldown" mean?</h3>
+<p>A brief technical pause of a few seconds after a grid closes. It ensures the broker processes all closures fully before the EA scans for a new entry signal, preventing overlapping orders.</p>
+
+<h3>How do I update the EA to a new version?</h3>
+<p>Update notifications are handled by MetaTrader. Go to <b>Toolbox → Market → Purchases → Mercaria Unicorn → Update</b>. Settings and active states are preserved during updates.</p>
+
+<h3>What does "Distance to MC" represent?</h3>
+<p>The distance in points from the current price to your broker's margin call limit. Color cues: <span class="pill gn">green</span> = safe (over 500 points), <span class="pill or">orange</span> = warning (200–500 points), <span class="pill rd">red</span> = critical (less than 200 points). If red, consider reducing volume or switching to a safer profile.</p>
+
+<!-- ────────────────────────────────────────────────── -->
+<!--  DISCLAIMER                                        -->
+<!-- ────────────────────────────────────────────────── -->
+<hr>
+<div class="disclaimer">
+<b>Disclaimer.</b> Mercaria Unicorn EA is a trading automation tool. Past performance is not indicative of future results. Grid trading strategies involve risk of significant drawdown during prolonged trend movements. The trader bears full responsibility for their choice of risk profile, account deposit, leverage, and protection settings (Lock, MaxDrawdownUSD, MaxLossCount). Before trading on a live account, backtesting in the MT5 Strategy Tester and trading on a demo account for at least 1–2 sessions is strictly recommended.
+</div>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
 [![MQL5 Market](https://img.shields.io/badge/Buy%20on-MQL5%20Market-orange)](https://www.mql5.com/en/market/product/177680)
 [![YouTube](https://img.shields.io/badge/YouTube-Live%20Runs-red)](https://www.youtube.com/@Mercaria_Official)
 
-**[🛒 Get it on MQL5 Market](https://www.mql5.com/en/market/product/177680)** · **[▶️ Watch live runs](https://www.youtube.com/@Mercaria_Official)** · **[🌐 mibase.online](https://mibase.online/ea.html)**
+**[🛒 Get it on MQL5 Market](https://www.mql5.com/en/market/product/177680)** · **[▶️ Watch live runs](https://www.youtube.com/@Mercaria_Official)** · **[✈️ Telegram](https://t.me/mercaria)** · **[🌐 Website](https://www.mibase.online/ea)**
 
 </div>
 
@@ -146,11 +146,27 @@ Yes — a free demo is on the MQL5 page. Test for at least 1–2 full sessions t
 
 ---
 
+## 🌍 Read in your language
+
+**Full user guide (HTML):**
+[🇬🇧 English](https://htmlpreview.github.io/?https://github.com/MIB-2026/mercaria-unicorn-gold-ea/blob/main/descriptions/UserGuide-EN.html) ·
+[🇺🇦 Українська](https://htmlpreview.github.io/?https://github.com/MIB-2026/mercaria-unicorn-gold-ea/blob/main/descriptions/UserGuide-UK.html)
+
+**Market description:**
+[🇬🇧 EN](descriptions/Description-EN.txt) ·
+[🇩🇪 DE](descriptions/Description-DE.txt) ·
+[🇮🇹 IT](descriptions/Description-IT.txt) ·
+[🇹🇷 TR](descriptions/Description-TR.txt) ·
+[🇨🇳 ZH](descriptions/Description-ZH.txt)
+
+---
+
 ## 🔗 Links
 
 - 🛒 **MQL5 Market:** https://www.mql5.com/en/market/product/177680
 - ▶️ **YouTube (live runs):** https://www.youtube.com/@Mercaria_Official
-- 🌐 **Website:** https://mibase.online/ea.html
+- ✈️ **Telegram:** https://t.me/mercaria
+- 🌐 **Website:** https://www.mibase.online/ea
 - 👤 **Author:** Anton Serozhkin — quantitative developer & EA author (14 years trading, 4 years building AI/quant systems).
 
 ---
